@@ -163,32 +163,32 @@ void Container::reset_merged()
 }
 
 // Public
-/* 
- * Add a single Element to members (copying its fields to new address),
- * growing members as needed
-*/
-void Container::add(Element &passed_element)
-{
+// /* 
+//  * Add a single Element to members (copying its fields to new address),
+//  * growing members as needed
+// */
+// void Container::add(Element &passed_element)
+// {
 
-    while (this->n_members + 1 >= this->len_members)
-    { /* The members arr would be over capacity */
-        grow_members();
-    }
+//     while (this->n_members + 1 >= this->len_members)
+//     { /* The members arr would be over capacity */
+//         grow_members();
+//     }
 
-    if (strcmp(passed_element.get_type(), "Label") == 0)
-    {
-        this->members[n_members] = new Label(*static_cast<Label *>(&passed_element), true);
-    }
-    else if (strcmp(passed_element.get_type(), "Panel") == 0)
-    {
-        this->members[n_members] = new Container(*static_cast<Container *>(&passed_element), true);
-    }
+//     if (strcmp(passed_element.get_type(), "Label") == 0)
+//     {
+//         this->members[n_members] = new Label(*static_cast<Label *>(&passed_element), true);
+//     }
+//     else if (strcmp(passed_element.get_type(), "Panel") == 0)
+//     {
+//         this->members[n_members] = new Container(*static_cast<Container *>(&passed_element), true);
+//     }
 
-    std::cout << "is_dynamic = " << this->members[n_members]->get_is_dynamic() << std::endl; // Debug
+//     std::cout << "is_dynamic = " << this->members[n_members]->get_is_dynamic() << std::endl; // Debug
 
-    this->n_members += 1;
-    this->has_changed = true;
-}
+//     this->n_members += 1;
+//     this->has_changed = true;
+// }
 
 /* 
  * Adds Element to members, Element is not copied, so changing it outside

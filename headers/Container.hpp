@@ -45,7 +45,7 @@ public:
   Element *get_member(int index) { return this->members[index]; }
 
   // Mutators
-  void add(Element &passed_element);
+  // void add(Element &passed_element);
   void add(Element *passed_element);
   // void add(Element **passed_elements, int n_elements);
   void remove(int index);

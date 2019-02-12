@@ -2,6 +2,8 @@
 ncurses and jpanel-esque c++ library for terminal output.
 
 Important note:
+    () Currently, the void Container::add(Element &passed_element) function generates a memory leak, and I'm focusing on other things, so please use the pointer add function.
+    
     () Every object you are intended to construct yourself in this library take a boolean value of whether or not the object is created dynamically, to try to avoid double free's. This parameter is required for all constructors but for copy constructors, it defaults to considering it as statically allocated. If you want to avoid memory leaks, please set this parameter to true when constructing. This param is also always the last required (non-default) parameter.
 
     () To clarify, all correctly-flagged dynamically-allocated Elements THAT YOU ADD TO ANY CONTAINER will be deleted for you, but this is not true for Elements that you do not add to anything. This is also not true for the Windows you create, as it cannot delete itself. If you dynamically create your base Window, you must delete it yourself.

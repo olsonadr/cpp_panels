@@ -15,7 +15,7 @@ void Window::resize_terminal()
     char resize_str[26];
     sprintf(resize_str,
             "printf '\e[8;%d;%dt'",
-            this->dim.y + 1, this->dim.x); // ANSI sequence, resizes terminal
+            this->dim.y+1, this->dim.x); // ANSI sequence, resizes terminal
     system(resize_str);
 }
 
@@ -33,16 +33,19 @@ Window::~Window()
 void Window::display()
 {
     merge();
-    // std::cout << std::endl;
+    system("printf '\e[H'"); // Set cursor to top-left corner
     for (int row = 0; row < this->dim.y; row++)
     {
         for (int col = 0; col < this->dim.x; col++)
         {
             std::cout << this->merged_arr[row][col];
         }
-        std::cout << std::endl;
+
+        if (row < this->dim.y - 1)
+        {
+            std::cout << std::endl;
+        }
     }
-    system("printf '\e[H'");
 }
 
 /*
@@ -51,7 +54,7 @@ void Window::display()
 */
 void Window::setup()
 {
-    // system("printf '\e[?25l'"); // ANSI sequence, makes cursor invisible
+    system("printf '\e[?25l'"); // ANSI sequence, makes cursor invisible
     system("printf '\e[2J'"); // ANSI clear of current screen
     resize_terminal();
 }
@@ -66,5 +69,6 @@ void Window::unsafe_clear()
 {
     system("CLS");            // Windows OS clear
     system("tput clear");     // Unix terminal clear
-    system("printf '\e[2J'"); // ANSI clear of current screen
+    // system("printf '\e[2J'"); // ANSI clear of current screen
+    system("printf '\e[H'");  // Set cursor to top-left corner
 }

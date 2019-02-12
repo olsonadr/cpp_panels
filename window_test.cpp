@@ -20,12 +20,12 @@ int main()
 
     // Adding Elements to their containers (order matters!)
     p.add(l2);
-    p.add(l4);
+    p.add(&l4);
     w.add(&l1);
     w.add(l3);
     w.add(&l5);
-    w.add(p);
-    w.add(l6);
+    w.add(&p);
+    w.add(&l6);
 
     // Seting up and displaying the Window
     w.setup();
@@ -39,7 +39,6 @@ int main()
     l5.set_pos(5, 22);
 
     // Redisplaying Window
-    w.unsafe_clear();
     w.display();
     getchar();
 

@@ -5,17 +5,19 @@
  */
 
 #include "../headers/Container.hpp"
+#include <iostream> // Temp
 
 // Constructors + Destructors + Operator Overloads
 Container::Container(int pos_x, int pos_y,
                      int width, int height,
+                     bool is_dynamic,
                      const char *type, const char *name)
-    : Element(pos_x, pos_y, type, name),
+    : Element(pos_x, pos_y, is_dynamic, type, name),
       members(new Element *[1]),
       n_members(0),
       len_members(1)
 {
-    char **merged_arr = new char *[height];
+    this->merged_arr = new char *[height];
     for (int row = 0; row < height; row++)
     {
         merged_arr[row] = new char[width];
@@ -26,8 +28,8 @@ Container::Container(int pos_x, int pos_y,
         .y = height};
 }
 
-Container::Container(const Container &old_container)
-    : Element(static_cast<Element>(old_container)),
+Container::Container(const Container &old_container, bool is_dynamic)
+    : Element(old_container, is_dynamic),
       members(new Element *[old_container.len_members]),
       n_members(old_container.n_members),
       len_members(old_container.len_members)
@@ -114,7 +116,15 @@ void Container::operator=(const Container &old_container)
 
 Container::~Container()
 {
+    for (int i = 0; i < this->n_members; i++)
+    {
+        if (this->members[i]->get_is_dynamic())
+        {
+            delete this->members[i];
+        }
+    }
     delete[] this->members;
+
     for (int row = 0; row < this->dim.y; row++)
     {
         delete[] this->merged_arr[row];
@@ -153,37 +163,51 @@ void Container::reset_merged()
 }
 
 // Public
-
-/* Add a single Element to members, growing members as needed */
-void Container::add(Element passed_element)
+/* 
+ * Add a single Element to members (copying its fields to new address),
+ * growing members as needed
+*/
+void Container::add(Element &passed_element)
 {
+
     while (this->n_members + 1 >= this->len_members)
     { /* The members arr would be over capacity */
         grow_members();
     }
 
-    this->members[n_members] = new Element(passed_element);
+    if (strcmp(passed_element.get_type(), "Label") == 0)
+    {
+        this->members[n_members] = new Label(*static_cast<Label *>(&passed_element), true);
+    }
+    else if (strcmp(passed_element.get_type(), "Panel") == 0)
+    {
+        this->members[n_members] = new Container(*static_cast<Container *>(&passed_element), true);
+    }
+
+    std::cout << "is_dynamic = " << this->members[n_members]->get_is_dynamic() << std::endl; // Debug
 
     this->n_members += 1;
     this->has_changed = true;
 }
 
-/* Add an arr of Elements to members, growing members as needed */
-void Container::add(Element *passed_elements,
-                    int n_elements)
+/* 
+ * Adds Element to members, Element is not copied, so changing it outside
+ * affects it inside. Grows members as needed, takes an Element.
+ */
+void Container::add(Element *passed_element)
 {
-    while (this->n_members + n_elements > this->len_members)
-    { /* The members arr would be over capacity */
-        grow_members();
-    }
-
-    for (int i = 0; i < n_elements; i++)
+    if (strcmp(passed_element->get_type(), "Window") != 0)
     {
-        this->members[n_members + i] = new Element(passed_elements[i]);
-    }
+        while (this->n_members + 1 >= this->len_members)
+        { /* The members arr would be over capacity */
+            grow_members();
+        }
 
-    this->n_members += n_elements;
-    this->has_changed = true;
+        this->members[n_members] = passed_element;
+
+        this->n_members += 1;
+        this->has_changed = true;
+    }
 }
 
 /* Remove the Element at passed index from the members array */
@@ -226,10 +250,8 @@ char **Container::merge()
         {
             if (this->members[i]->get_is_visible())
             { /* Member is visible, will be layered onto container's output */
-
-                if (this->members[i]->get_type() == "Label")
+                if (strcmp(this->members[i]->get_type(), "Label") == 0)
                 { /* Member is a Label */
-
                     Label *curr_member =
                         static_cast<Label *>(this->members[i]);
 
@@ -238,17 +260,10 @@ char **Container::merge()
 
                     for (int j = 0; j < curr_member->get_len(); j++)
                     {
-                        // Check for \n escape character
-                        if (curr_member->get_str()[j] == '\\' &&
-                            j + 1 < curr_member->get_len() &&
-                            curr_member->get_str()[j + 1] == 'n')
-                        { /* Line-break (\n) at current j */
-                            j++;
+                        if (curr_member->get_str()[j] == '\n')
+                        { /* Line-break (\n) at current j, reset to left edge */
                             row++;
-                            if (!curr_member->get_is_vertical())
-                            { /* Label is horizontal (on \n reset to left) */
-                                col = curr_member->get_pos().x;
-                            }
+                            col = curr_member->get_pos().x;
                             continue;
                         }
 
@@ -271,11 +286,11 @@ char **Container::merge()
                     }
                 }
 
-                else if (this->members[i]->get_type() == "Panel")
-                { /* Member is a Panel */
+                else if (strcmp(this->members[i]->get_type(), "Panel") == 0)
+                { /* Member is an implemented Container */
 
                     Container *curr_member =
-                        static_cast<Panel *>(this->members[i]);
+                        static_cast<Container *>(this->members[i]);
 
                     int row;
                     int col;

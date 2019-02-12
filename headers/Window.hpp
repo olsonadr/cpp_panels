@@ -8,23 +8,33 @@
 #define WINDOW_HPP
 
 #include <iostream>
+#include "sys/ioctl.h"
 #include "Container.hpp"
 
 class Window : public Container
 {
+protected:
+  // Methods
+  void resize_terminal();
+
 public:
   // Constructors + Destructors + Operators
   Window(int width, int height,
+         bool is_dynamic,
          const char *name = "Window")
-      : Container(0, 0, width, height, "Window", name) {}
+      : Container(0, 0, width, height, is_dynamic, "Window", name) {}
 
-  Window(const Window &old_window)
-      : Container(old_window) {}
+  Window(const Window &old_window, bool is_dynamic = false)
+      : Container(old_window, is_dynamic) {}
+
+  ~Window();
 
   void operator=(const Window &old_window) { Container::operator=(old_window); }
 
   // Methods
-  void print_merged();
+  void setup();
+  void display();
+  void unsafe_clear();
 };
 
 #endif

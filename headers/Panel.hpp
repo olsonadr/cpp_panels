@@ -13,21 +13,23 @@
 
 class Panel : public Container
 {
-    public:
-      // Constructors + Destructors + Operators
-      Panel(int x = 0, int y = 0,
-            int width = 0, int height = 0,
-            const char *name = "Panel")
-          : Container(x, y, width, height, "Panel", name) {}
+  public:
+    // Constructors + Destructors + Operators
+    Panel(int pos_x, int pos_y,
+          int width, int height,
+          bool is_dynamic,
+          const char *name = "Panel")
+        : Container(pos_x, pos_y, width, height, is_dynamic, "Panel", name) {}
 
-      Panel(int width, int height,
-            const char *name = "Panel")
-          : Container(0, 0, width, height, "Panel", name) {}
+    Panel(int width, int height,
+          bool is_dynamic,
+          const char *name = "Panel")
+        : Container(0, 0, width, height, is_dynamic, "Panel", name) {}
 
-      Panel(const Panel &old_panel)
-          : Container(old_panel) {}
+    Panel(const Panel &old_panel, bool is_dynamic = false)
+        : Container(old_panel, is_dynamic) {}
 
-      void operator=(const Panel &old_panel) { Container::operator=(old_panel); }
+    void operator=(const Panel &old_panel) { Container::operator=(old_panel); }
 };
 
 #endif

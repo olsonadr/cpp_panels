@@ -9,7 +9,7 @@
 
 #include "Element.hpp"
 #include "special_components.hpp"
-#include "special_containers.hpp"
+#include <cstring>
 
 class Container : public Element
 {
@@ -27,12 +27,13 @@ protected:
 
 public:
   // Constructors + Assignment Overload + Destructors
-  Container(int pos_x = 0, int pos_y = 0,
-            int width = 0, int height = 0,
+  Container(int pos_x, int pos_y,
+            int width, int height,
+            bool is_dynamic,
             const char *type = "Container",
             const char *name = "Container"); /* Primary constructor, empty members */
 
-  Container(const Container &old_container); /* Copy constructor */
+  Container(const Container &old_container, bool is_dynamic = false); /* Copy constructor */
 
   void operator=(const Container &old_container); /* Overloaded assignment */
 
@@ -44,8 +45,9 @@ public:
   Element *get_member(int index) { return this->members[index]; }
 
   // Mutators
-  void add(Element passed_element);
-  void add(Element *passed_elements, int n_elements);
+  void add(Element &passed_element);
+  void add(Element *passed_element);
+  // void add(Element **passed_elements, int n_elements);
   void remove(int index);
   char **merge();
 };

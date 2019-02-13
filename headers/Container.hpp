@@ -7,17 +7,17 @@
 #ifndef CONTAINER_HPP
 #define CONTAINER_HPP
 
-#include <cstring>
-#include "Element.hpp"
-#include "Label.hpp"
-#include "Border.hpp"
+#include <cstring>     /* For strcmp() */
+#include "Element.hpp" /* Base class of Container */
+#include "Label.hpp"   /* For using specific functionality while merging */
+#include "Border.hpp"  /* For using specific functionality while merging */
 
 class Container : public Element
 {
 protected:
   // Fields (inherits visibility, type, position)
   struct int_duple dim; /* Dimensions of the container */
-  char *merged_arr;    /* Dynamic 1D arr of chars of merged layers */
+  char *merged_arr;     /* Dynamic 1D arr of chars of merged layers */
   Element **members;    /* Dynamic array of Element pointers */
   int n_members;        /* Number of members in members arr */
   int len_members;      /* Length of members arr */
@@ -32,11 +32,11 @@ public:
             int width, int height,
             bool is_dynamic,
             const char *type = "Container",
-            const char *name = "Container"); /* Primary constructor, empty members */
+            const char *name = "Container");                                   /* Primary constructor, empty members */
 
   Container(const Container &old_container, bool is_dynamic = STATIC_ELEMENT); /* Copy constructor */
-
-  void operator=(const Container &old_container); /* Overloaded assignment */
+  
+  void operator=(const Container &old_container);                              /* Overloaded assignment */
 
   ~Container();
 

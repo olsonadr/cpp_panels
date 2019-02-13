@@ -49,9 +49,10 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 - Implement:
   - [x] Border
   - [ ] Alert Box
+  - [ ] Input / History of Input Box 
 - Look Into:
   - [ ] pipe()
   - [ ] dup2()
-  - [ ] Using <stdio.h> and <unistd.h> instead of <iostream> (use printf (maybe write with pipes later)).
+  - [x] Using <stdio.h> and <unistd.h> instead of <iostream> (use printf (maybe write with pipes later)).
 - Misc:
   - [x] Change character buffers to 1D

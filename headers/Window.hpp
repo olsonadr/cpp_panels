@@ -7,14 +7,20 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include <iostream>
-#include <stdio.h>
-#include "sys/ioctl.h"
-#include "Container.hpp"
+#include <stdlib.h>      /* For system() call used in unsafe_clear() */
+#include <termios.h>     /* For toggling ECHO of stdin */
+#include "Container.hpp" /* Base class of Window */
+
+// Maybe using later
+// #include <stdio.h>    /* For possibly messing with stdin and stdout later */
+// #include <unistd.h>   /* For possibly forking, etc. at a later point */
 
 class Window : public Container
 {
 protected:
+  // Fields
+  struct termios term_info;
+
   // Methods
   void resize_terminal();
 
@@ -27,7 +33,7 @@ public:
   Window(const Window &old_window)
       : Container(old_window, false) {}
 
-  void operator=(const Window &old_window) { Container::operator=(old_window); }
+  void operator=(const Window &old_window);
 
   // Methods
   void open();

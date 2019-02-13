@@ -36,7 +36,6 @@ Label::Label(int pos_x, int pos_y,
     }
 }
 
-
 // Overloaded Assignment
 void Label::operator=(const Label &old_label)
 {
@@ -46,7 +45,6 @@ void Label::operator=(const Label &old_label)
     this->is_vertical = old_label.is_vertical;
 }
 
-
 // Methods
 /*
  * Sets the str field and len, modifying memory as needed.
@@ -54,6 +52,7 @@ void Label::operator=(const Label &old_label)
 void Label::set_str(const char *new_val,
                     bool is_vertical)
 {
+    this->has_changed = true;
     this->str = new_val;
     this->is_vertical = is_vertical;
     this->len = 0;

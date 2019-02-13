@@ -45,6 +45,8 @@ public:
   // Mutators
   void set_pos(int x, int y) { this->pos = {.x = x, .y = y}; }
   void reset_has_changed() { this->has_changed = false; }
+  void make_visible() { this->is_visible = true; }
+  void make_invisible() { this->is_visible = false; }
   void toggle_visible();
 };
 

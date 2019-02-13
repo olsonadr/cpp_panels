@@ -20,6 +20,12 @@ void Window::resize_terminal()
 }
 
 // Public
+// Operator Overload
+void Window::operator=(const Window &old_window)
+{
+    Container::operator=(old_window);
+}
+
 // Methods
 /*
  * Update and print the contents of the buffer
@@ -28,41 +34,39 @@ void Window::display()
 {
     merge();
     printf("\e[H"); // Set cursor to top-left corner
-    for (int row = 0; row < this->dim.y; row++)
-    {
-        for (int col = 0; col < this->dim.x; col++)
-        {
-            std::cout << this->merged_arr[(row * this->dim.x) + col];
-        }
-
-        if (row < this->dim.y - 1)
-        {
-            std::cout << std::endl;
-        }
-    }
+    printf(merged_arr);
     printf("\e[H"); // Set cursor to top-left corner
 }
 
 /*
- * Clears screen, makes the cursor invisible, and resizes the terminal, should
- * be called before displaying at all.
+ * Clears screen, makes the cursor invisible, disables ECHO and resizes the
+ * terminal, should be called before displaying at all.
 */
 void Window::open()
 {
     printf("\e[?25l"); // ANSI sequence, makes cursor invisible
-    // printf("\e[2J");   // ANSI clear of current screen
     resize_terminal();
+    merge();
+
+    // Disable Echo
+    tcgetattr(0, &this->term_info);
+    this->term_info.c_lflag &= ~ECHO; /* Turn off ECHO */
+    tcsetattr(0, TCSANOW, &this->term_info);
 }
 
 /*
  * All operations that get terminal ready for user to use it as normal again,
- * currently just makes the cursor visible again.
+ * currently makes the cursor visible again and enables ECHO.
  */
 void Window::close()
 {
     printf("\e[?25h"); // Make cursor visible
     printf("\e[2J");   // ANSI clear of current screen
     printf("\e[H");    // Set cursor to top-left corner
+
+    // Restore Echo
+    this->term_info.c_lflag |= ECHO; /* Turn on ECHO */
+    tcsetattr(0, TCSANOW, &this->term_info);
 }
 
 /*

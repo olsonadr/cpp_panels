@@ -16,7 +16,8 @@ Container::Container(int pos_x, int pos_y,
       n_members(0),
       len_members(1)
 {
-    this->merged_arr = new char[width * height];
+    // Contents + ends of lines
+    this->merged_arr = new char[(width + 1) * height];
 
     this->dim = {
         .x = width,
@@ -132,6 +133,10 @@ void Container::grow_members()
     }
 }
 
+/*
+ * Resets the merged buffer back to 'empty' state full of spaces with \n chars
+ * at the end of each line.
+ */
 void Container::reset_merged()
 {
     for (int row = 0; row < this->dim.y; row++)
@@ -140,7 +145,16 @@ void Container::reset_merged()
         {
             this->merged_arr[(row * this->dim.x) + col] = ' ';
         }
+
+        if (row < this->dim.y - 1)
+        { /* For all but the last rows (which has a \0 instead). */
+
+            this->merged_arr[(row * this->dim.x) + this->dim.x] = '\n';
+        }
     }
+
+    // The last chararcter of the buffer
+    this->merged_arr[((this->dim.y - 1) * this->dim.x) + this->dim.x] = '\0';
 }
 
 // Public

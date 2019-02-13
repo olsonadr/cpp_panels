@@ -10,6 +10,8 @@
 #define VERTICAL_LABEL true
 #define HORIZONTAL_LABEL false
 
+#include <cstdio>
+#include <cstring>
 #include "Element.hpp"
 
 class Label : public Element
@@ -42,7 +44,7 @@ public:
 
   // Accessors + Mutators
   void set_str(const char *new_val,
-               bool is_vertical = false);
+               bool is_vertical = HORIZONTAL_LABEL);
 
   const char *get_str() { return this->str; }
 

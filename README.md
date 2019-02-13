@@ -47,7 +47,7 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 
 ## TODO
 - Implement:
-  - [] Border
+  - [x] Border
   - [] Alert Box
 - Look Into:
   - [] pipe()

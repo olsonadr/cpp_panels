@@ -26,7 +26,7 @@ class Panel : public Container
           const char *name = "Panel")
         : Container(0, 0, width, height, is_dynamic, "Panel", name) {}
 
-    Panel(const Panel &old_panel, bool is_dynamic = false)
+    Panel(const Panel &old_panel, bool is_dynamic = STATIC_ELEMENT)
         : Container(old_panel, is_dynamic) {}
 
     void operator=(const Panel &old_panel) { Container::operator=(old_panel); }

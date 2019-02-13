@@ -6,7 +6,7 @@
  *  right char.
  */
 
-#include "../headers/Border.hpp"
+#include "Border.hpp"
 
 // Constructors
 Border::Border(char corners,

@@ -21,19 +21,17 @@ protected:
 public:
   // Constructors + Destructors + Operators
   Window(int width, int height,
-         bool is_dynamic,
          const char *name = "Window")
-      : Container(0, 0, width, height, is_dynamic, "Window", name) {}
+      : Container(0, 0, width, height, false, "Window", name) {}
 
-  Window(const Window &old_window, bool is_dynamic = false)
-      : Container(old_window, is_dynamic) {}
-
-  ~Window();
+  Window(const Window &old_window)
+      : Container(old_window, false) {}
 
   void operator=(const Window &old_window) { Container::operator=(old_window); }
 
   // Methods
-  void setup();
+  void open();
+  void close();
   void display();
   void unsafe_clear();
 };

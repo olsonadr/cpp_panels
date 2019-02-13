@@ -7,16 +7,17 @@
 #ifndef CONTAINER_HPP
 #define CONTAINER_HPP
 
-#include "Element.hpp"
-#include "special_components.hpp"
 #include <cstring>
+#include "Element.hpp"
+#include "Label.hpp"
+#include "Border.hpp"
 
 class Container : public Element
 {
 protected:
   // Fields (inherits visibility, type, position)
   struct int_duple dim; /* Dimensions of the container */
-  char **merged_arr;    /* Dynamic 2D arr of chars of merged layers */
+  char *merged_arr;    /* Dynamic 1D arr of chars of merged layers */
   Element **members;    /* Dynamic array of Element pointers */
   int n_members;        /* Number of members in members arr */
   int len_members;      /* Length of members arr */
@@ -33,7 +34,7 @@ public:
             const char *type = "Container",
             const char *name = "Container"); /* Primary constructor, empty members */
 
-  Container(const Container &old_container, bool is_dynamic = false); /* Copy constructor */
+  Container(const Container &old_container, bool is_dynamic = STATIC_ELEMENT); /* Copy constructor */
 
   void operator=(const Container &old_container); /* Overloaded assignment */
 
@@ -45,11 +46,10 @@ public:
   Element *get_member(int index) { return this->members[index]; }
 
   // Mutators
-  // void add(Element &passed_element);
+  void add(Element &passed_element);
   void add(Element *passed_element);
-  // void add(Element **passed_elements, int n_elements);
   void remove(int index);
-  char **merge();
+  char *merge();
 };
 
 #endif

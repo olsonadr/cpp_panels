@@ -4,7 +4,7 @@
  *  vertical. \n can be used in the string.
  */
 
-#include "../headers/Label.hpp"
+#include "Label.hpp"
 
 // Constructor
 Label::Label(int pos_x, int pos_y,
@@ -27,7 +27,7 @@ Label::Label(int pos_x, int pos_y,
              bool is_dynamic,
              const char *name)
     : Element(pos_x, pos_y, is_dynamic, "Label", name),
-      str(str), is_vertical(false)
+      str(str), is_vertical(HORIZONTAL_LABEL)
 {
     this->len = 0;
     while (this->str[len] != '\0')

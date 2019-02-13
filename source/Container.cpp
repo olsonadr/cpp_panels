@@ -1,10 +1,10 @@
 /*
  *  Container class. It is an Element with dimensions that has an array of
- *  Elements, which it can compile into one 2D array of characters for
+ *  Elements, which it can compile into one 1D buffer of characters for
  *  rendering of many layered elements.
  */
 
-#include "../headers/Container.hpp"
+#include "Container.hpp"
 
 // Constructors + Destructors + Operator Overloads
 Container::Container(int pos_x, int pos_y,
@@ -16,11 +16,7 @@ Container::Container(int pos_x, int pos_y,
       n_members(0),
       len_members(1)
 {
-    this->merged_arr = new char *[height];
-    for (int row = 0; row < height; row++)
-    {
-        merged_arr[row] = new char[width];
-    }
+    this->merged_arr = new char[width * height];
 
     this->dim = {
         .x = width,
@@ -34,15 +30,14 @@ Container::Container(const Container &old_container, bool is_dynamic)
       len_members(old_container.len_members)
 {
     // Merged array
-    this->merged_arr = new char *[old_container.dim.y];
+    this->merged_arr = new char[old_container.dim.y * old_container.dim.x];
     for (int row = 0; row < old_container.dim.y; row++)
     {
-        this->merged_arr[row] = new char[old_container.dim.x];
-
         for (int col = 0; col < old_container.dim.x; col++)
         { /* Copy contents of merged_arr */
 
-            this->merged_arr[row][col] = old_container.merged_arr[row][col];
+            this->merged_arr[(row * old_container.dim.x) + col] =
+                old_container.merged_arr[(row * old_container.dim.x) + col];
         }
     }
 
@@ -69,26 +64,18 @@ void Container::operator=(const Container &old_container)
 
     if (needs_realloc)
     { /* Delete and start re-allocating (different dimensions) */
-        for (int row = 0; row < this->dim.y; row++)
-        {
-            delete[] this->merged_arr[row];
-        }
-        delete[] this->merged_arr;
 
-        this->merged_arr = new char *[old_container.dim.y];
+        delete[] this->merged_arr;
+        this->merged_arr = new char[old_container.dim.y * old_container.dim.x];
     }
 
     for (int row = 0; row < old_container.dim.y; row++)
     {
-        if (needs_realloc)
-        {
-            this->merged_arr[row] = new char[old_container.dim.x];
-        }
-
         for (int col = 0; col < old_container.dim.x; col++)
         { /* Copy contents of merged_arr */
 
-            this->merged_arr[row][col] = old_container.merged_arr[row][col];
+            this->merged_arr[(row * old_container.dim.x) + col] =
+                old_container.merged_arr[(row * old_container.dim.x) + col];
         }
     }
     // End merged array
@@ -123,11 +110,6 @@ Container::~Container()
         }
     }
     delete[] this->members;
-
-    for (int row = 0; row < this->dim.y; row++)
-    {
-        delete[] this->merged_arr[row];
-    }
     delete[] this->merged_arr;
 }
 
@@ -156,42 +138,34 @@ void Container::reset_merged()
     {
         for (int col = 0; col < this->dim.x; col++)
         {
-            this->merged_arr[row][col] = ' ';
+            this->merged_arr[(row * this->dim.x) + col] = ' ';
         }
     }
 }
 
 // Public
-// /*
-//  * Add a single Element to members (copying its fields to new address),
-//  * growing members as needed
-// */
-// void Container::add(Element &passed_element)
-// {
+/*
+ * Add an Element to members, growing members as needed, takes a reference.
+ * Changing the Element outside affects it inside as well.
+*/
+void Container::add(Element &passed_element)
+{
 
-//     while (this->n_members + 1 >= this->len_members)
-//     { /* The members arr would be over capacity */
-//         grow_members();
-//     }
+    while (this->n_members + 1 >= this->len_members)
+    { /* The members arr would be over capacity */
 
-//     if (strcmp(passed_element.get_type(), "Label") == 0)
-//     {
-//         this->members[n_members] = new Label(*static_cast<Label *>(&passed_element), true);
-//     }
-//     else if (strcmp(passed_element.get_type(), "Panel") == 0)
-//     {
-//         this->members[n_members] = new Container(*static_cast<Container *>(&passed_element), true);
-//     }
+        grow_members();
+    }
 
-//     std::cout << "is_dynamic = " << this->members[n_members]->get_is_dynamic() << std::endl; // Debug
+    this->members[n_members] = &passed_element;
 
-//     this->n_members += 1;
-//     this->has_changed = true;
-// }
+    this->n_members += 1;
+    this->has_changed = true;
+}
 
 /* 
  * Adds Element to members, Element is not copied, so changing it outside
- * affects it inside. Grows members as needed, takes an Element.
+ * affects it inside. Grows members as needed, takes an Element pointer.
  */
 void Container::add(Element *passed_element)
 {
@@ -199,6 +173,7 @@ void Container::add(Element *passed_element)
     {
         while (this->n_members + 1 >= this->len_members)
         { /* The members arr would be over capacity */
+
             grow_members();
         }
 
@@ -227,7 +202,7 @@ void Container::remove(int index)
  * of chars held in merged_arr, but only if it has been updated and
  * so must be re-compiled or merged, returns merged_arr.
  */
-char **Container::merge()
+char *Container::merge()
 {
     bool must_update = this->has_changed;
     if (must_update == false)
@@ -251,6 +226,7 @@ char **Container::merge()
             { /* Member is visible, will be layered onto container's output */
                 if (strcmp(this->members[i]->get_type(), "Label") == 0)
                 { /* Member is a Label */
+
                     Label *curr_member =
                         static_cast<Label *>(this->members[i]);
 
@@ -270,7 +246,7 @@ char **Container::merge()
                         if (row < this->dim.y &&
                             col < this->dim.x)
                         {
-                            this->merged_arr[row][col] = curr_member->get_str()[j];
+                            this->merged_arr[(row * this->dim.x) + col] = curr_member->get_str()[j];
                         }
 
                         // Move cursor to next position for Label
@@ -287,20 +263,45 @@ char **Container::merge()
 
                 else if (strcmp(this->members[i]->get_type(), "Border") == 0)
                 { /* Member is a Border */
+
                     Border *curr_member =
                         static_cast<Border *>(this->members[i]);
 
-                    for (int row = curr_member->get_pos().y; row < this->dim.y; row++)
+                    for (int row = 0; row < this->dim.y; row++)
                     {
-                        for (int col = curr_member->get_pos().x; col < this->dim.x;)
+                        for (int col = 0; col < this->dim.x; col++)
                         {
-                            if (row == curr_member->get_pos().y)
+                            if ((row == 0 || row == this->dim.y - 1) &&
+                                (col == 0 || col == this->dim.x - 1))
+                            { /* Is a corner position */
+
+                                this->merged_arr[(row * this->dim.x) + col] =
+                                    curr_member->get_corner_char();
+                            }
+                            else if (row == 0)
                             { /* The top row */
+
+                                this->merged_arr[(row * this->dim.x) + col] =
+                                    curr_member->get_top_char();
                             }
                             else if (row == this->dim.y - 1)
                             { /* The bottom row */
-                            }
 
+                                this->merged_arr[(row * this->dim.x) + col] =
+                                    curr_member->get_bottom_char();
+                            }
+                            else if (col == 0)
+                            { /* Left-most column */
+
+                                this->merged_arr[(row * this->dim.x) + col] =
+                                    curr_member->get_left_char();
+                            }
+                            else if (col == this->dim.x - 1)
+                            { /* Right-most column */
+
+                                this->merged_arr[(row * this->dim.x) + col] =
+                                    curr_member->get_right_char();
+                            }
                         }
                     }
                 }
@@ -315,7 +316,7 @@ char **Container::merge()
                     int col;
 
                     // Merge the panel and store its result
-                    char **curr_member_contents = curr_member->merge();
+                    char *curr_member_contents = curr_member->merge();
 
                     for (int m_row = 0; m_row < curr_member->get_dim().y; m_row++)
                     { /* For each row in curr_member */
@@ -330,8 +331,8 @@ char **Container::merge()
                             if (row < this->dim.y &&
                                 col < this->dim.x)
                             {
-                                this->merged_arr[row][col] =
-                                    curr_member_contents[m_row][m_col];
+                                this->merged_arr[(row * this->dim.x) + col] =
+                                    curr_member_contents[(m_row * curr_member->get_dim().x) + m_col];
                             }
                         }
                     }

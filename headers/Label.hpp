@@ -7,6 +7,9 @@
 #ifndef LABEL_HPP
 #define LABEL_HPP
 
+#define VERTICAL_LABEL true
+#define HORIZONTAL_LABEL false
+
 #include "Element.hpp"
 
 class Label : public Element
@@ -29,7 +32,7 @@ public:
         bool is_dynamic,
         const char *name = "Label");
 
-  Label(const Label &old_label, bool is_dynamic = false)
+  Label(const Label &old_label, bool is_dynamic = STATIC_ELEMENT)
       : Element(old_label, is_dynamic),
         str(old_label.str),
         len(old_label.len),

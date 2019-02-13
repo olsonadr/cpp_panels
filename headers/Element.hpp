@@ -6,6 +6,9 @@
 #ifndef ELEMENT_HPP
 #define ELEMENT_HPP
 
+#define DYNAMIC_ELEMENT true
+#define STATIC_ELEMENT false
+
 class Element
 {
 protected:
@@ -27,7 +30,7 @@ public:
           const char *type = "Element",
           const char *name = "Element");
 
-  Element(const Element &old_element, bool is_dynamic = false);
+  Element(const Element &old_element, bool is_dynamic = STATIC_ELEMENT);
 
   void operator=(const Element &old_element);
 

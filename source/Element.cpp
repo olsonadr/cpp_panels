@@ -3,7 +3,7 @@
  *  for some sick curses-esque rendering.
  */
 
-#include "../headers/Element.hpp"
+#include "Element.hpp"
 
 Element::Element(int pos_x, int pos_y, bool is_dynamic,
                  const char *type, const char *name)

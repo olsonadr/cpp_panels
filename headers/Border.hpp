@@ -36,7 +36,7 @@ class Border : public Element
            const char *name = "Border");
 
     Border(const Border &old_border,
-           bool is_dynamic = false);
+           bool is_dynamic = STATIC_ELEMENT);
 
     void operator=(const Border &old_border);
 

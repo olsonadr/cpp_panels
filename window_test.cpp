@@ -1,6 +1,7 @@
 #include "headers/cpp_panels.hpp"
 
-#include <iostream>
+#include <stdio.h>
+// #include <iostream>
 
 int main()
 {
@@ -16,7 +17,7 @@ int main()
     Label *l3 = new Label(10, 3, "New line escape here ->\nshould be on new line", true);
     Label l4(8, 0, "Should be cut -> Occluded?", false);
     Label l5(0, 20, "Should move!", false);
-    Label l6(width - 14, height-1, "Press enter...", false);
+    Label l6(width - 14, height - 1, "Press enter...", false);
 
     // Adding Elements to their containers (order matters!)
     p.add(l2);

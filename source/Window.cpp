@@ -12,18 +12,18 @@
  */
 void Window::resize_terminal()
 {
-    char resize_str[26];
+    char resize_str[16];
     sprintf(resize_str,
-            "printf '\e[8;%d;%dt'",
-            this->dim.y+1, this->dim.x); // ANSI sequence, resizes terminal
-    system(resize_str);
+            "\e[8;%d;%dt",
+            this->dim.y + 1, this->dim.x); // ANSI sequence, resizes terminal
+    printf(resize_str);
 }
 
 // Public
 // Destructor
 Window::~Window()
 {
-    system("printf '\e[?25h'");
+    printf("\e[?25h"); // Make cursor visible
 }
 
 // Methods
@@ -33,7 +33,7 @@ Window::~Window()
 void Window::display()
 {
     merge();
-    system("printf '\e[H'"); // Set cursor to top-left corner
+    printf("\e[H"); // Set cursor to top-left corner
     for (int row = 0; row < this->dim.y; row++)
     {
         for (int col = 0; col < this->dim.x; col++)
@@ -54,8 +54,8 @@ void Window::display()
 */
 void Window::setup()
 {
-    system("printf '\e[?25l'"); // ANSI sequence, makes cursor invisible
-    system("printf '\e[2J'"); // ANSI clear of current screen
+    printf("\e[?25l"); // ANSI sequence, makes cursor invisible
+    printf("\e[2J");   // ANSI clear of current screen
     resize_terminal();
 }
 
@@ -67,8 +67,8 @@ void Window::setup()
  */
 void Window::unsafe_clear()
 {
-    system("CLS");            // Windows OS clear
-    system("tput clear");     // Unix terminal clear
-    // system("printf '\e[2J'"); // ANSI clear of current screen
-    system("printf '\e[H'");  // Set cursor to top-left corner
+    system("CLS");        // Windows OS clear
+    system("tput clear"); // Unix terminal clear
+    printf("\e[H");       // Set cursor to top-left corner
+    // printf("\e[2J");     // ANSI clear of current screen
 }

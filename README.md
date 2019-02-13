@@ -3,6 +3,7 @@
 ## Abstract
 An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.oracle.com/javase/tutorial/uiswing/components/panel.html)-esque c++ library for terminal output.
 
+
 ## Important Notes
 - Currently, the void Container::add(Element &passed_element) function generates a memory leak, and I'm focusing on other things, so it is commented out. Please use the pointer add function.
 
@@ -44,3 +45,14 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 - You can set the 'str' of a Label, passing the new value and whether it's vertical. To add Elements to a Container (Panel or Window), you can call the add() function, passing in either an Element object or an Element pointer. If you pass in an Element object, it will be copied when being added, but if you pass in an Element pointer, it will not be copied and the memory address will just be added to the members list. This means that modifying the Element in your implementation will affect the Element within the class as well (so you don't need to free any of your own memory if you pass in the pointers and correctly pass in that they're dynamically allocated).
 
 - To display any of this work, you'll need to create a Window. Note that you cannot add Windows to any other Container. You can imagine a Window as the 'canvas' on which you put all other Elements. You can add Elements to a Window freely (you can add Labels directly, for example). Before rendering anything, you should call the setup() function. This will clear your screen and resize your terminal to size (hopefully). Feel free to call this whenever you want to reset the terminal size, if you want to force this for the user. When you want to render to the terminal, call the display() function of your Window object. This will print the contents of its merged buffer to the terminal. Have fun!
+
+
+## TODO
+- Implement:
+  - Border
+  - Alert Box
+- Look Into:
+  - pipe()
+  - dup2()
+  - Using <stdio.h> and <unistd.h> instead of <iostream> (use printf (maybe write with pipes later)).
+- Change character buffers to 1D

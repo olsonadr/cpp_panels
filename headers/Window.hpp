@@ -8,6 +8,7 @@
 #define WINDOW_HPP
 
 #include <iostream>
+#include <stdio.h>
 #include "sys/ioctl.h"
 #include "Container.hpp"
 

@@ -5,7 +5,6 @@
  */
 
 #include "../headers/Container.hpp"
-#include <iostream> // Temp
 
 // Constructors + Destructors + Operator Overloads
 Container::Container(int pos_x, int pos_y,
@@ -163,7 +162,7 @@ void Container::reset_merged()
 }
 
 // Public
-// /* 
+// /*
 //  * Add a single Element to members (copying its fields to new address),
 //  * growing members as needed
 // */
@@ -282,6 +281,26 @@ char **Container::merge()
                         else
                         {
                             col++;
+                        }
+                    }
+                }
+
+                else if (strcmp(this->members[i]->get_type(), "Border") == 0)
+                { /* Member is a Border */
+                    Border *curr_member =
+                        static_cast<Border *>(this->members[i]);
+
+                    for (int row = curr_member->get_pos().y; row < this->dim.y; row++)
+                    {
+                        for (int col = curr_member->get_pos().x; col < this->dim.x;)
+                        {
+                            if (row == curr_member->get_pos().y)
+                            { /* The top row */
+                            }
+                            else if (row == this->dim.y - 1)
+                            { /* The bottom row */
+                            }
+
                         }
                     }
                 }

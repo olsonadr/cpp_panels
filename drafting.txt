@@ -100,6 +100,16 @@ class Label : protected Element {
 
 
 
+Console:
+    Input
+	Takes input and adds it to the history array, does not handle any kind of special input
+    Output
+	Adds string to history
+    set_in_pos
+	Takes global position of the
+
+
+
 
 #------------------------------------------------------+--------------------------------#
 |                                                      |                                |

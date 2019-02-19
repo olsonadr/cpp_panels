@@ -13,7 +13,7 @@ Border::Border(char corners,
                char top, char bottom,
                char left, char right,
                bool is_dynamic,
-               const char *name)
+               const char * name)
     : Element(0, 0, is_dynamic, "Border", name),
       corner_char(corners),
       top_char(top), bottom_char(bottom),
@@ -23,7 +23,7 @@ Border::Border(char corners,
                char top_and_bot,
                char left_and_right,
                bool is_dynamic,
-               const char *name)
+               const char * name)
     : Element(0, 0, is_dynamic, "Border", name),
       corner_char(corners),
       top_char(top_and_bot),
@@ -32,7 +32,7 @@ Border::Border(char corners,
       right_char(left_and_right) {}
 
 // Copy Constructor
-Border::Border(const Border &old_border, bool is_dynamic)
+Border::Border(const Border & old_border, bool is_dynamic)
     : Element(old_border, is_dynamic),
       corner_char(old_border.corner_char),
       top_char(old_border.top_char),
@@ -41,7 +41,7 @@ Border::Border(const Border &old_border, bool is_dynamic)
       right_char(old_border.right_char) {}
 
 // Overloaded Operator
-void Border::operator=(const Border &old_border)
+void Border::operator=(const Border & old_border)
 {
     Element::operator=(old_border);
     this->corner_char = old_border.corner_char;

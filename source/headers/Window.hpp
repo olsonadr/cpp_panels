@@ -17,29 +17,29 @@
 
 class Window : public Container
 {
-protected:
-  // Fields
-  struct termios term_info;
+    protected:
+        // Fields
+        struct termios term_info;
 
-  // Methods
-  void resize_terminal();
+        // Methods
+        void resize_terminal();
 
-public:
-  // Constructors + Destructors + Operators
-  Window(int width, int height,
-         const char *name = "Window")
-      : Container(0, 0, width, height, false, "Window", name) {}
+    public:
+        // Constructors + Destructors + Operators
+        Window(int width, int height,
+               const char * name = "Window")
+            : Container(0, 0, width, height, false, "Window", name) {}
 
-  Window(const Window &old_window)
-      : Container(old_window, false) {}
+        Window(const Window & old_window)
+            : Container(old_window, false) {}
 
-  void operator=(const Window &old_window);
+        void operator=(const Window & old_window);
 
-  // Methods
-  void open();
-  void close();
-  void display();
-  void unsafe_clear();
+        // Methods
+        void open();
+        void close();
+        void display();
+        void unsafe_clear();
 };
 
 #endif

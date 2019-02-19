@@ -5,6 +5,10 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 
 
 ## Important Notes
+- I'm putting this project together as an excuse to practice c++, expose myself to more c-style coding, and play around with different structures and styles of inheritance. This is not the best project and there are likely many better ways of accomplishing it, but it is a means of practice. I am new to all of this, so be gentle!
+
+- In all instances of characters and strings in this program, I interpret the '`' character as an empty slot, meaning that area is 'transparent' and elements below are visible through it. Keep this in mind.
+
 - Every object you are intended to construct yourself in this library take a boolean value of whether or not the object is created dynamically, to try to avoid double free's. This parameter is required for all constructors but for copy constructors, which default to considering it as statically allocated. If you want to avoid memory leaks, please set this parameter to true when dynamically constructing this library's classes. This parameter is also always the last required (non-default) parameter.
 
 - To clarify, all correctly-flagged dynamically-allocated Elements **which you add to a container** will be deleted for you, but this is not true for Elements that you do not add to anything. This is also not true for the Windows you create, as they cannot delete themselves. If you dynamically create your base Window, you must delete it yourself.
@@ -56,3 +60,4 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
   - [x] Using <stdio.h> and <unistd.h> instead of <iostream> (use printf (maybe write with pipes later)).
 - Misc:
   - [x] Change character buffers to 1D
+  - [ ] Get rid of gross indices when accessing buffers by storing them in variables

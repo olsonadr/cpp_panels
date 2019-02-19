@@ -21,7 +21,7 @@ void Window::resize_terminal()
 
 // Public
 // Operator Overload
-void Window::operator=(const Window &old_window)
+void Window::operator=(const Window & old_window)
 {
     Container::operator=(old_window);
 }

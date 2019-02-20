@@ -1,10 +1,12 @@
-# cpp_panels library
+# cpp_panels library v1.0!
 
 ## Abstract
 An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.oracle.com/javase/tutorial/uiswing/components/panel.html)-esque c++ library for terminal output.
 
 
 ## Important Notes
+- Include using -lpanels now!
+
 - I'm putting this project together as an excuse to practice c++, expose myself to more c-style coding, and play around with different structures and styles of inheritance. This is not the best project and there are likely many better ways of accomplishing it, but it is a means of practice. I am new to all of this, so be gentle!
 
 - In all instances of characters and strings in this program, I interpret the '`' character as an empty slot, meaning that area is 'transparent' and elements below are visible through it. Keep this in mind.

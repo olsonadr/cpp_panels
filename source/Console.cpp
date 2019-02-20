@@ -15,7 +15,9 @@ Console::Console(int pos_x, int pos_y,
     : Element(pos_x, pos_y, is_dynamic, "Console", name),
       history_len(history_max), history_num(0),
       history(new char * [history_max]),
-      input_prefix(">> "), bg_char(' ')
+      input_prefix_len(3),
+      input_prefix(">> "),
+      bg_char(' ')
 {
     // Contents + ends of lines
     this->merged_arr = new char[(width + 1) * height];
@@ -41,6 +43,7 @@ Console::Console(const Console & old_console, bool is_dynamic)
       input_pos(old_console.input_pos),
       dim(old_console.dim),
       input_prefix(old_console.input_prefix),
+      input_prefix_len(old_console.input_prefix_len),
       bg_char(old_console.bg_char)
 {
     // Merged array
@@ -119,6 +122,7 @@ void Console::operator=(const Console & old_console)
     this->history_num = old_console.history_num;
     this->input_pos = old_console.input_pos;
     this->input_prefix = old_console.input_prefix;
+    this->input_prefix_len = old_console.input_prefix_len;
     this->bg_char = old_console.bg_char;
 }
 
@@ -190,7 +194,7 @@ void Console::disable_wrap()
     printf("\e[?7l"); // ANSI sequence, disables line-wrapping
 }
 
-void Console::pause()
+void Console::pause_and_flush()
 {
     while (getchar() != '\n');
 }
@@ -217,14 +221,18 @@ void Console::setup_input(struct int_duple g_console_pos)
 void Console::set_input_prefix(const char * input_prefix)
 {
     this->input_prefix = input_prefix;
+    this->input_prefix_len = strlen(input_prefix);
 }
 
 
 /*
  * Gets user input at the correct input position, adding the user's input
- * to the history list using output()
+ * to the history list using output(), taking the first n chars as designated
+ * by the second (optional parameter). If you do not set this to the length of
+ * the buffer you pass to take input into, it will take the first 100.
  */
-void Console::input(char * input_buff)
+void Console::input(char * input_buff,
+	int input_buff_size)
 {
     // Setup
     move_input();
@@ -233,7 +241,7 @@ void Console::input(char * input_buff)
     disable_wrap();
 
     // Get Input and Replace \n with \0
-    fgets(input_buff, MAX_INPUT_LENGTH, stdin);
+    fgets(input_buff, input_buff_size, stdin);
     size_t ln = strlen(input_buff) - 1;
 
     if (input_buff[ln] == '\n')
@@ -248,7 +256,11 @@ void Console::input(char * input_buff)
     move_home();
 
     // Push to History and Return
-    output(input_buff);
+    char * output_buff = new char[input_buff_size+input_prefix_len];
+    strcat(output_buff, input_prefix);
+    strcat(output_buff, input_buff);
+    output(output_buff);
+    delete output_buff;
 }
 
 
@@ -275,6 +287,15 @@ void Console::output(const char * line)
     }
 
     this->has_changed = true;
+}
+
+
+/*
+ * Clears the history array (like clearing a console) by setting history num to 0.
+ */
+void Console::clear()
+{
+    this->history_num = 0;
 }
 
 
@@ -364,12 +385,20 @@ char * Console::merge()
             {
                 if (this->history[i][j] == '\n')
                 {
-                    /* Line-break (\n) at current j, reset to left edge */
+                    /* '\n' at current j, reset to left and skip to next char */
 
                     row++;
                     col = 0;
                     continue;
                 }
+
+		if (col >= this->dim.x)
+		{
+		    /* Would hit edge, wrap back to left */
+
+		    row++;
+		    col = 0;
+		}
 
                 // Sets the appropriate char in buffer
                 if (row >= 0 && row < this->dim.y &&

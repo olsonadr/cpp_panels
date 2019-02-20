@@ -15,6 +15,15 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 
 - This project uses ANSI escape sequences to clear and resize the terminal, which may need to be manually enabled depending on the terminal you're using if these codes don't work, you may just need to resize your terminal to the correct size and make sure you're using the console output stream display function (currently only one available). The unsafe_clear() function of Window clears the screen using OS specific and not totally secure methods, use at your own risk.
 
+- Defined Constants
+  - DYNAMIC_ELEMENT	=  true	    (used when constructing any Element)
+  - STATIC_ELEMENT	=  false    (used when constructing any Element)
+  - VERTICAL_LABEL	=  true	    (used when constructing or modifying Labels)
+  - HORIZONTAL_LABEL	=  false    (used when constructing or modifying Labels)
+  - VERTICAL_LIST	=  true	    (used when constructing or modifying Lists)
+  - HORIZONTAL_LIST	=  false    (used when constructing or modifying Lists)
+  - MAX_INPUT_LENGTH	=  100	    (default size of input buffers for Consoles)
+
 
 ## Basic Structure
 - Components are objects that hold data of some kind and can be created in very specific ways. They have an x and y position and their values, but these are the only mutable aspects. Components are the lowest level of object you'll use and cannot have components added to them, even if they are containers under the hood. The coordinates of the component are processed relative to the container holding it.
@@ -26,20 +35,39 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 - Label:
   - A string with position, this is the fundamental component of the library. Using '\n' in your Label's value drops the cursor to the next row at the origin of the Label. A label can be horizontally or vertically oriented.
 
-  - To construct a Label, pass in its position as two integer values, the contents of the label (what will be displayed) as a cstring, whether the Label should be displayed vertically as a boolean, whether the Label is constructed dynamically, and the 'name' of the Label (a recognizable title if you want to list the objects contained within a container later).
+  - To construct a Label, pass in its position as two integer values (col, row), the contents of the label (what will be displayed) as a cstring, whether the Label should be displayed vertically as a boolean, whether the Label is constructed dynamically, and the 'name' of the Label (a recognizable title if you want to list the objects contained within a container later). Refer to note on defined constants.
+
+- Border:
+  - The Border does not contain some merged buffer, it just contains characters for the corners and each side of the Border, which can be accessed and mutated as expected. The Border is then attached to its parent container when that parent merges.
+
+  - To construct a Border, pass in three or five characters (corners, top and bottom, left and right; or corners, top, bottom, left, and right), whether the object is dynamic as a boolean, and, optionally, a recognizable name for the Border.
+
+- Alert:
+  - Basically a Label in interface, but it covers the majority of its parent container (two-thirds of each dimension) when added and visible (DEFAULTS TO **INVISIBLE**). It has a string that it shows centered in the Alert box (each line is not centered, but the clump is, so center them relative to eachother). You can set the background character using set_bg_char(...) and you can set its Border's characters by using the same setters as you would with a Border.
+
+  - To construct an Alert box, pass in the string message, whether it is dynamic as a bool, and an optional recognizable name for the Alert box.
+
+- Console:
+  - Consoles are the primary method for terminal-like I/O in this system. Specifically, they primarily operate by calling output(...) with some null-terminated string to push some message to the Console, and input(...) with an input buffer (and optionally the size of the buffer (but please do pass it generally (it'll assume 100 if you don't))). This will echo the user input to the Console as well as put it into the passed buffer (null-terminated) for your program's use. The input area is always in the bottom of this component. Consoles do have dimension but cannot have any members. You can also clear() them. To use the input feature, you **must** call the setup_input(...) function, which takes the global coordinates of the Console (col, row) as a paremeter, and sets the correct position for input. An easy way to find these coordinates **AFTER THE CONSOLE HAS BEEN ADDED TO THE WINDOW IN SOME CAPACITY** is to search for the Console's name using the Window function find_global_pos(..) and passing in the previously set name of the Console. This cannot scroll as of now.
+
+  - To construct a Console, pass in its position as two integers (col, row), its width and height as integers, an integer representing the maximum number of elements to be stored in history (good practice to make this at least as much as the height of the Console so lines aren't cut off in an obvious manner), and whether this was allocated dynamically or not as a boolean. Optionally, you may (and very much should in this case) pass a string name to differentiate it from other Elements in your design later.
 
 
 ## Implemented Containers
 - Panel:
   - The simplest kind of container, only has position and dimension in and of itself and contains other components or containers. This is intended as the interface for the container class and is the only type of container that is considered when recursively merging buffers.
 
-  - To construct a Panel, pass you have two options. First, pass in its position as two integer values, it's dimensions as width and height integers, and whether it's dynamic as a boolean. The other option is to pass in just the dimensions and whether it's dynamic as described above. You can optionally add a name to either of these constructors if you want to label the Panel for later reference.
-        
+  - To construct a Panel, pass you have two options. First, pass in its position as two integer values (col, row), it's dimensions as width and height integers, and whether it's dynamic as a boolean. The other option is to pass in just the dimensions and whether it's dynamic as described above. You can optionally add a name to either of these constructors if you want to label the Panel for later reference.
+
 - Window:
   - This is the only container that allows you to actually display the contents of your layers of Elements. All Containers can merge their contents and return their character buffers, but Windows are the only one's that can interface with the terminal. You can add and remove elements to a Window as you would with a Panel using the methods of the Container class. Windows also resize the terminal when displayed.
 
   - To construct a Window, pass in its dimensions as two integers (width and height). Optionally, you can construct it with a name for distinguishing it from other Windows.
 
+- List:
+  - This is a container that is very similar to a Panel, except you only have direct control over one dimension, and the list can expand in the other. It holds members of any Element, but the positions of its members don't matter, the only thing that matters is the order of the elements. If the List is HORIZONTAL, they are stacked left to right. If the list is VERTICAL, they are stacked top to bottom. Making an element invisible directly will shift the following elements up or left accordingly. Pretty straightforward.
+
+  - To construct a List, pass in it's position as two integers (col, row), the 'other dimension' (width if it is VERTICAL, else height), whether it was allocated dynamicallly, and, optionally, whether it is vertical as a boolean and an optional recognizable name string. Refer to defined constants note.
 
 ## Intended Usage
 - The intended work flow would be to create the Components and Containers you'll be using, adding them to each other as needed for your layout, then adding everything to a primary Window, which you can then display.
@@ -52,8 +80,8 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 ## TODO
 - Implement:
   - [x] Border
-  - [ ] Alert Box
-  - [ ] Input / History of Input Box 
+  - [x] Alert Box
+  - [x] Input / History of Input Box
 - Look Into:
   - [ ] pipe()
   - [ ] dup2()

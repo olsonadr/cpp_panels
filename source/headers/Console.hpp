@@ -8,7 +8,7 @@
 #ifndef CONSOLE_HPP
 #define CONSOLE_HPP
 
-#define MAX_INPUT_LENGTH 100
+#define MAX_INPUT_SIZE 100
 
 #include <cstdlib>
 #include <cstring>
@@ -27,8 +27,9 @@ class Console : public Element
         int history_len;	    /* The maximum length of the history */
         struct int_duple input_pos; /* The global position of the input cursor */
 	const char * input_prefix;  /* The string preceding the input field */
+	int input_prefix_len;	    /* The length of the input prefix */
         char bg_char;		    /* The character to be put in empty space */
-        struct termios term_info;
+        struct termios term_info;   /* The termios allowing for echo manip, etc */
 
         // Functions
         void move_input();	    /* Moves cursor to the input pos */
@@ -58,17 +59,21 @@ class Console : public Element
         char get_bg_char() { return this->bg_char; }
 
         // Mutators
-        void input(char * input_buff);
-	const char * input();
-        void output(const char * line);
         void setup_input(struct int_duple g_console_pos);
 	void set_input_prefix(const char * input_prefix);
         void set_bg_char(char new_bg_char);
 	void reset_merged();
 	char * merge();
 
+	// I/O
+        void input(char * input_buff,
+		int input_buff_size = MAX_INPUT_SIZE);
+	const char * input();
+        void output(const char * line);
+	void clear();
+
 	// Misc
-	void pause();
+	void pause_and_flush();
 };
 
 #endif

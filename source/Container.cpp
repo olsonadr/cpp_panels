@@ -380,9 +380,19 @@ char * Container::merge()
                     message_x = alert_x + (alert_width / 2) - (message_width / 2);
                     message_y = alert_y + (alert_height / 2) - (message_height / 2);
 
-                    for (int row = alert_y; row < alert_y + alert_height; row++)
+                    /* debug */
+		    //printf("alert_x = %d, alert_y = %d\nalert_width = %d, alert_height= %d\nmessage_x = %d, message_y = %d\nmessage_width = %d, message_height = %d\n",
+		    //       alert_x, alert_y, alert_width, alert_height,
+		    //       message_x, message_y, message_width, message_height);
+		    //getchar();
+                    /* end debug */
+		    
+		    int row = 0;
+		    int col = 0;
+
+                    for (row = alert_y; row < alert_y + alert_height; row++)
                     {
-                        for (int col = alert_x; col < alert_x + alert_width; col++)
+                        for (col = alert_x; col < alert_x + alert_width; col++)
                         {
                             // Handle the Alert's Border
                             if ((row == alert_y || row == alert_y + alert_height - 1) &&
@@ -448,48 +458,54 @@ char * Container::merge()
                             else
                             {
                                 /* In body of Alert, fill with bg_char */
+				
                                 this->merged_arr[(row * this->dim.x) + col] =
                                     curr_member->get_bg_char();
-
                             }
                         }
                     }
 
                     // Handle Message
-                    int row = message_y;
-                    int col = message_x;
+                    row = message_y;
+                    col = message_x;
 
-                    for (int j = 0; j < curr_member->get_len(); j++)
-                    {
-                        /* For each character in the message */
+		    /* debug */
+		    //printf("row = %d, col = %d", row, col);
+		    //getchar();
+		    /* end debug */
 
-                        if (curr_member->get_message()[j] == '\n')
-                        {
-                            /* Line-break (\n) at current j, reset to left edge */
+		
+		    for (int j = 0; j < curr_member->get_len(); j++)
+		    {
+			/* For each character in the message */
 
-                            row++;
-                            col = message_x;
-                            continue;
-                        }
+			if (curr_member->get_message()[j] == '\n')
+			{
+			    /* Line-break (\n) at current j, reset to left edge */
 
-                        // Sets the appropriate char in buffer
-                        if (row >= alert_y && row < alert_y + alert_height &&
-                                col >= alert_x && col < alert_x + alert_width)
-                        {
-                            /* Is in bounds at index */
+			    row++;
+			    col = message_x;
+			    continue;
+			}
 
-                            if (curr_member->get_message()[j] != '`')
-                            {
-                                /* Is not transparent char at index */
+			// Sets the appropriate char in buffer
+			if (row >= alert_y && row < alert_y + alert_height &&
+				col >= alert_x && col < alert_x + alert_width)
+			{
+			    /* Is in bounds at index */
 
-                                this->merged_arr[(row * this->dim.x) + col] =
-                                    curr_member->get_message()[j];
-                            }
-                        }
+			    if (curr_member->get_message()[j] != '`')
+			    {
+				/* Is not transparent char at index */
 
-                        // Move cursor to next position for Alert
-                        col++;
-                    }
+				this->merged_arr[(row * this->dim.x) + col] =
+				    curr_member->get_message()[j];
+			    }
+			}
+
+			// Move cursor to next position for Alert
+			col++;
+		    }
                 }
 
                 else if (strcmp(this->members[i]->get_type(), "Border") == 0)

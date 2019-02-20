@@ -47,8 +47,8 @@ int main()
 
 
     /* Console Test */
-    // Setup
     /*
+     *    // Setup
      *    int window_width = 70, window_height = 30;
      *    int panel_pos_x = 8, panel_pos_y = 3, panel_width = 42, panel_height = 22;
      *    int console_pos_x = 1, console_pos_y = 1, console_width = 40, console_height = 20,

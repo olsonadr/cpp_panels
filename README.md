@@ -4,12 +4,21 @@
 An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.oracle.com/javase/tutorial/uiswing/components/panel.html)-esque c++ library for terminal output.
 
 
+## Table of Contents  
+- [Notes](#important-notes) - list of various tips and notes you may find useful when using the library
+- [Structure](#basic-structure) - the basic structure / types of classes in this library (Components / Containers)
+- [Components](#implemented-components) - list of all currently implemented Components in the library
+- [Containers](#implemented-containers) - list of all currently implemented Containers in the library
+- [Usage](#intended-usage) - the intended usage and basic work-flow of this library
+- [TODO](#TODO) - list of things I'm looking into
+
+
 ## Important Notes
+- I'm putting this project together as an excuse to practice c++, expose myself to more c-style coding, and play around with different structures and styles of inheritance. This is not the best project and there are likely many better ways of accomplishing it, but it is a means of practice. I am new to all of this, so be gentle, but if you stumble upon this project, any feedback would be appreciated!
+
 - These notes aren't actually that important, and this README has just way too much information about how to use this library, but reading it will probably help you out a bit. Headers are located in the source/headers directory and the library files will be generated in the root directory. Those are the only actually important notes.
 
-- When making, the default all target compiles the library as a shared 'libpanels.so' file, but you can explicitly call make with the targets 'shared' or 'static' to compile one specifically. Making it statically generates a file 'libpanels.a' in the root directory. There is a test program in the 'test_program' directory. Similarly, you can specify 'static' or 'shared' when making that and that makefile can be used as an example of how to compile with the library (copy the headers you need). The test program has many sections of code that show various pieces of functionality that are commented out. Just uncomment a section if you want to test that functionality. Have fun!
-
-- I'm putting this project together as an excuse to practice c++, expose myself to more c-style coding, and play around with different structures and styles of inheritance. This is not the best project and there are likely many better ways of accomplishing it, but it is a means of practice. I am new to all of this, so be gentle!
+- When making, the default all target compiles the library as a shared 'libpanels.so' file, but you can explicitly call make with the targets 'shared' or 'static' to compile one specifically. Making it statically generates a file 'libpanels.a' in the root directory. There is a test program in the 'test_program' directory. Similarly, you can specify 'static' or 'shared' when making that and that makefile can be used as an example of how to compile with the library (copy the headers you need). The test program has many sections of code that show various pieces of functionality that are commented out. Just uncomment a section if you want to test that functionality.
 
 - In all instances of characters and strings in this program, I interpret the '`' character as an empty slot, meaning that area is 'transparent' and elements below are visible through it. Keep this in mind.
 
@@ -47,12 +56,12 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
   - To construct a Border, pass in three or five characters (corners, top and bottom, left and right; or corners, top, bottom, left, and right), whether the object is dynamic as a boolean, and, optionally, a recognizable name for the Border.
 
 - Alert:
-  - Basically a Label in interface, but it covers the majority of its parent container (two-thirds of each dimension) when added and visible (DEFAULTS TO **INVISIBLE**). It has a string that it shows centered in the Alert box (each line is not centered, but the clump is, so center them relative to eachother). You can set the background character using set_bg_char(...) and you can set its Border's characters by using the same setters as you would with a Border.
+  - Basically a Label in interface, but it covers the majority of its parent container (two-thirds of each dimension) when added and visible (DEFAULTS TO **INVISIBLE**). It has a string that it shows centered in the Alert box (each line is not centered, but the clump is, so center them relative to each other). You can set the background character using set_bg_char(...) and you can set its Border's characters by using the same setters as you would with a Border.
 
-  - To construct an Alert box, pass in the string message, whether it is dynamic as a bool, and an optional recognizable name for the Alert box.
+  - To construct an Alert box, pass in the string message, whether it is dynamic as a boolian, and an optional recognizable name for the Alert box.
 
 - Console:
-  - Consoles are the primary method for terminal-like I/O in this system. Specifically, they primarily operate by calling output(...) with some null-terminated string to push some message to the Console, and input(...) with an input buffer (and optionally the size of the buffer (but please do pass it generally (it'll assume 100 if you don't))). This will echo the user input to the Console as well as put it into the passed buffer (null-terminated) for your program's use. The input area is always in the bottom of this component. Consoles do have dimension but cannot have any members. You can also clear() them. To use the input feature, you **must** call the setup_input(...) function, which takes the global coordinates of the Console (col, row) as a paremeter, and sets the correct position for input. An easy way to find these coordinates **AFTER THE CONSOLE HAS BEEN ADDED TO THE WINDOW IN SOME CAPACITY** is to search for the Console's name using the Window function find_global_pos(..) and passing in the previously set name of the Console. This cannot scroll as of now.
+  - Consoles are the primary method for terminal-like I/O in this system. Specifically, they primarily operate by calling output(...) with some null-terminated string to push some message to the Console, and input(...) with an input buffer (and optionally the size of the buffer (but please do pass it generally (it'll assume 100 if you don't))). This will echo the user input to the Console as well as put it into the passed buffer (null-terminated) for your program's use. The input area is always in the bottom of this component. Consoles do have dimension but cannot have any members. You can also clear() them. To use the input feature, you **must** call the setup_input(...) function, which takes the global coordinates of the Console (col, row) as a parameter, and sets the correct position for input. An easy way to find these coordinates **AFTER THE CONSOLE HAS BEEN ADDED TO THE WINDOW IN SOME CAPACITY** is to search for the Console's name using the Window function find_global_pos(..) and passing in the previously set name of the Console. This cannot scroll as of now.
 
   - To construct a Console, pass in its position as two integers (col, row), its width and height as integers, an integer representing the maximum number of elements to be stored in history (good practice to make this at least as much as the height of the Console so lines aren't cut off in an obvious manner), and whether this was allocated dynamically or not as a boolean. Optionally, you may (and very much should in this case) pass a string name to differentiate it from other Elements in your design later.
 
@@ -71,7 +80,7 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 - List:
   - This is a container that is very similar to a Panel, except you only have direct control over one dimension, and the list can expand in the other. It holds members of any Element, but the positions of its members don't matter, the only thing that matters is the order of the elements. If the List is HORIZONTAL, they are stacked left to right. If the list is VERTICAL, they are stacked top to bottom. Making an element invisible directly will shift the following elements up or left accordingly. Pretty straightforward.
 
-  - To construct a List, pass in it's position as two integers (col, row), the 'other dimension' (width if it is VERTICAL, else height), whether it was allocated dynamicallly, and, optionally, whether it is vertical as a boolean and an optional recognizable name string. Refer to defined constants note.
+  - To construct a List, pass in it's position as two integers (col, row), the 'other dimension' (width if it is VERTICAL, else height), whether it was allocated dynamically, and, optionally, whether it is vertical as a boolean and an optional recognizable name string. Refer to defined constants note.
 
 ## Intended Usage
 - The intended work flow would be to create the Components and Containers you'll be using, adding them to each other as needed for your layout, then adding everything to a primary Window, which you can then display.

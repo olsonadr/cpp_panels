@@ -74,10 +74,22 @@ void Element::make_invisible()
 }
 
 /*
+ * Resets whether the Element has changed to true. This is intended to be called
+ * by the user whenever they modify some Element in an unintended way.
+ */
+void Element::mark_has_changed()
+{
+    this->has_changed = true;
+}
+
+/*
  * Resets whether the Element has changed back to false. This should only
  * be called after these changes have been accounted for.
  */
-void Element::reset_has_changed() { this->has_changed = false; }
+void Element::reset_has_changed()
+{
+    this->has_changed = false;
+}
 
 /*
  * Sets the position of the Element to the passed integer values, marking

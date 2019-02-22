@@ -46,6 +46,7 @@ class Element
         // Mutators
         void set_pos(int x, int y);
         void set_pos(struct int_duple m_pos);
+	virtual void mark_has_changed();
         virtual void reset_has_changed();
         void make_visible();
         void make_invisible();

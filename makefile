@@ -2,16 +2,21 @@ CC=g++
 LIBRARY=panels
 HPP_DIR=./source/headers
 CPP_DIR=./source
-OUT_DIR=./compiled
+OUT_DIR=./build
 
-test: lib$(LIBRARY).so $(OUT_DIR)
+all: shared
+shared: lib$(LIBRARY).so $(OUT_DIR)
+static: lib$(LIBRARY).a $(OUT_DIR)
 
 lib$(LIBRARY).so: $(OUT_DIR) $(OUT_DIR)/Element.o $(OUT_DIR)/Container.o $(OUT_DIR)/Window.o $(OUT_DIR)/Label.o $(OUT_DIR)/Border.o $(OUT_DIR)/List.o $(OUT_DIR)/Console.o $(OUT_DIR)/Alert.o
 	$(CC) -std=c++11 -g -fPIC -shared -I$(HPP_DIR) $(OUT_DIR)/Element.o $(OUT_DIR)/Container.o $(OUT_DIR)/Window.o $(OUT_DIR)/Label.o $(OUT_DIR)/Border.o $(OUT_DIR)/List.o $(OUT_DIR)/Console.o $(OUT_DIR)/Alert.o -o lib$(LIBRARY).so
 
+lib$(LIBRARY).a: $(OUT_DIR) $(OUT_DIR)/Element.o $(OUT_DIR)/Container.o $(OUT_DIR)/Window.o $(OUT_DIR)/Label.o $(OUT_DIR)/Border.o $(OUT_DIR)/List.o $(OUT_DIR)/Console.o $(OUT_DIR)/Alert.o
+	ar rvs lib$(LIBRARY).a $(OUT_DIR)/Element.o $(OUT_DIR)/Container.o $(OUT_DIR)/Window.o $(OUT_DIR)/Label.o $(OUT_DIR)/Border.o $(OUT_DIR)/List.o $(OUT_DIR)/Console.o $(OUT_DIR)/Alert.o
+
 $(OUT_DIR)/Element.o: $(OUT_DIR) $(CPP_DIR)/Element.cpp
 	$(CC) -std=c++11 -g -fPIC -c -I$(HPP_DIR) $(CPP_DIR)/Element.cpp -o $(OUT_DIR)/Element.o
-	
+
 $(OUT_DIR)/Container.o: $(OUT_DIR) $(CPP_DIR)/Container.cpp
 	$(CC) -std=c++11 -g -fPIC -c -I$(HPP_DIR) $(CPP_DIR)/Container.cpp -o $(OUT_DIR)/Container.o
 
@@ -37,4 +42,4 @@ $(OUT_DIR):
 	mkdir $(OUT_DIR)
 
 clean:
-	rm -f $(OUT_DIR)/* lib$(LIBRARY).so
+	rm -r -f $(OUT_DIR) lib$(LIBRARY).so lib$(LIBRARY).a

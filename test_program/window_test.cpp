@@ -109,7 +109,6 @@ int main()
     /* End Console Test */
 
 
-
     /* List Test */
     /*
      *     // Setup
@@ -170,7 +169,6 @@ int main()
     /* End List Test */
 
 
-
     /* find() and find_global_pos() Test */
     /*
      *    // Creating Window
@@ -227,7 +225,6 @@ int main()
      *    w.close();
      */
     /* End find() and find_global_pos() Test */
-
 
 
     /* Border and Label Test */
@@ -308,7 +305,6 @@ int main()
      *    w.close();
      */
     /* End Border and Label Test */
-
 
 
     return 0;

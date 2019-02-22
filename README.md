@@ -5,7 +5,7 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 
 
 ## Important Notes
-- Include using -lpanels now!
+- When making, the default all target compiles the library as a shared 'libpanels.so' file, but you can explicitly call make with the targets 'shared' or 'static' to compile one specifically. Making it statically generates a file 'libpanels.a' in the root directory. There is a test program in the 'test_program' directory. Similarly, you can specify 'static' or 'shared' when making that and that makefile can be used as an example of how to compile with the library (copy the headers you need). The test program has many sections of code that show various pieces of functionality that are commented out. Just uncomment a section if you want to test that functionality. Have fun!
 
 - I'm putting this project together as an excuse to practice c++, expose myself to more c-style coding, and play around with different structures and styles of inheritance. This is not the best project and there are likely many better ways of accomplishing it, but it is a means of practice. I am new to all of this, so be gentle!
 

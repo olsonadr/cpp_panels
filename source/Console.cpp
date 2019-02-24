@@ -8,6 +8,10 @@
 #include "Console.hpp"
 
 // Constructors, Operator Overrides, Destructors
+
+/*
+ * Parameterized (and primary) constructor
+ */
 Console::Console(int pos_x, int pos_y,
                  int width, int height,
                  int history_max, bool is_dynamic,
@@ -17,7 +21,8 @@ Console::Console(int pos_x, int pos_y,
       history(new char * [history_max]),
       input_prefix_len(3),
       input_prefix(">> "),
-      bg_char(' ')
+      bg_char(' '),
+      display_input_line(true)
 {
     // Contents + ends of lines
     this->merged_arr = new char[(width + 1) * height];
@@ -36,6 +41,9 @@ Console::Console(int pos_x, int pos_y,
 }
 
 
+/*
+ * Copy Constructor
+ */
 Console::Console(const Console & old_console, bool is_dynamic)
     : Element(old_console, is_dynamic),
       history_num(old_console.history_num),
@@ -44,7 +52,8 @@ Console::Console(const Console & old_console, bool is_dynamic)
       dim(old_console.dim),
       input_prefix(old_console.input_prefix),
       input_prefix_len(old_console.input_prefix_len),
-      bg_char(old_console.bg_char)
+      bg_char(old_console.bg_char),
+      display_input_line(old_console.display_input_line)
 {
     // Merged array
     this->merged_arr = new char[old_console.dim.y * old_console.dim.x];
@@ -77,6 +86,9 @@ Console::Console(const Console & old_console, bool is_dynamic)
 }
 
 
+/*
+ * Overriden assignment operator
+ */
 void Console::operator=(const Console & old_console)
 {
     Element::operator=(static_cast<Element>(old_console));
@@ -118,15 +130,20 @@ void Console::operator=(const Console & old_console)
         }
     }
 
+    // Misc Fields
     this->dim = old_console.dim;
     this->history_num = old_console.history_num;
     this->input_pos = old_console.input_pos;
     this->input_prefix = old_console.input_prefix;
     this->input_prefix_len = old_console.input_prefix_len;
     this->bg_char = old_console.bg_char;
+    this->display_input_line = old_console.display_input_line;
 }
 
 
+/*
+ * Destructor
+ */
 Console::~Console()
 {
     for (int i = 0; i < this->history_num; i++)
@@ -139,7 +156,14 @@ Console::~Console()
 }
 
 
+
+
 // Protected Functions
+
+/*
+ * Moves the terminal cursor to the input_pos coord. Setup input first!
+ * Uses ANSI escape sequence to do this.
+ */
 void Console::move_input()
 {
     // Set cursor to input position
@@ -147,24 +171,39 @@ void Console::move_input()
 }
 
 
+/*
+ * Moves the terminal cursor to the home pos (top-left). Uses an ANSI escape
+ * sequence to do this.
+ */
 void Console::move_home()
 {
     printf("\e[H"); // Set cursor to top-left corner
 }
 
 
+/*
+ * Makes the cursor visible in the terminal using an ANSI escape sequence.
+ */
 void Console::cursor_visible()
 {
     printf("\e[?25h"); // Make cursor visible
 }
 
 
+/*
+ * Makes the cursor invisible in the terminal using an ANSI escape sequence.
+ */
 void Console::cursor_invisible()
 {
     printf("\e[?25l"); // ANSI sequence, makes cursor invisible
 }
 
 
+/*
+ * Enables ECHOing in the terminal, such that keystrokes of the user are immediately
+ * displayed at the current cursor position in the terminal, using termios. This is
+ * standard terminal behaviour. Used for getting input.
+ */
 void Console::enable_echo()
 {
     // Restore Echo
@@ -174,6 +213,11 @@ void Console::enable_echo()
 }
 
 
+/*
+ * Disables ECHOing in the terminal, such that keystrokes of the user are not automa-
+ * tically displayed at the current cursor position in the terminal, using termios.
+ * This is usual password entry terminal behaviour, for example.
+ */
 void Console::disable_echo()
 {
     // Disable Echo
@@ -183,23 +227,30 @@ void Console::disable_echo()
 }
 
 
+/*
+ * Enables line-wrapping in the terminal, such that lines that are too long for the
+ * current terminal size are wrapped down onto the next line. Used for input.
+ */
 void Console::enable_wrap()
 {
     printf("\e[?7h"); // ANSI sequence, enables line-wrapping
 }
 
 
+/*
+ * Disables line-wrapping in the terminal, such that lines that are too long for the
+ * current terminal size are NOT wrapped down onto the next line. Used for input.
+ */
 void Console::disable_wrap()
 {
     printf("\e[?7l"); // ANSI sequence, disables line-wrapping
 }
 
-void Console::pause_and_flush()
-{
-    while (getchar() != '\n');
-}
+
+
 
 // Public Functions
+
 /*
  * Sets the input position to the bottom left corner of the console
  * (after the prefix) by taking the global position of the console.
@@ -222,6 +273,28 @@ void Console::set_input_prefix(const char * input_prefix)
 {
     this->input_prefix = input_prefix;
     this->input_prefix_len = strlen(input_prefix);
+    this->has_changed = true;
+}
+
+
+/*
+ * Sets whether the input line will be displayed when merged.
+ */
+void Console::set_display_input_line(bool new_val)
+{
+    this->display_input_line = new_val;
+    this->has_changed = true;
+}
+
+
+/*
+ * Waits for and gets characters from stdin until it finds a return, thus stopping
+ * a single of input of multiple characters ("ynyny<enter>") from being pushed through
+ * to later getchar() calls. Not used in the library, but is an option.
+ */
+void Console::pause_and_flush()
+{
+    while (getchar() != '\n');
 }
 
 
@@ -232,7 +305,7 @@ void Console::set_input_prefix(const char * input_prefix)
  * the buffer you pass to take input into, it will take the first 100.
  */
 void Console::input(char * input_buff,
-	int input_buff_size)
+                    int input_buff_size)
 {
     // Setup
     move_input();
@@ -256,7 +329,7 @@ void Console::input(char * input_buff,
     move_home();
 
     // Push to History and Return
-    char * output_buff = new char[input_buff_size+input_prefix_len];
+    char * output_buff = new char[input_buff_size + input_prefix_len];
     strcat(output_buff, input_prefix);
     strcat(output_buff, input_buff);
     output(output_buff);
@@ -296,6 +369,7 @@ void Console::output(const char * line)
 void Console::clear()
 {
     this->history_num = 0;
+    this->has_changed = true;
 }
 
 
@@ -342,7 +416,7 @@ void Console::reset_merged()
  */
 char * Console::merge()
 {
-    bool must_update = true;//this->has_changed;
+    bool must_update = this->has_changed;
 
     if (must_update)
     {
@@ -351,9 +425,20 @@ char * Console::merge()
         int row = this->dim.y - 1;
 
         // Input line
-        for (int col = 0; col < strlen(this->input_prefix); col++)
+        if (this->display_input_line == true)
         {
-            this->merged_arr[(row * this->dim.x) + col] = this->input_prefix[col];
+	    /* The input line should be rendered */
+
+            for (int col = 0; col < strlen(this->input_prefix); col++)
+            {
+                this->merged_arr[(row * this->dim.x) + col] = this->input_prefix[col];
+            }
+        }
+        else
+        {
+            /* The input line is invisible, move row down to account for this */
+
+            row++;
         }
 
         int col = 0;
@@ -361,7 +446,7 @@ char * Console::merge()
         // Rest of lines
         for (int i = 0; i < this->history_num; i++)
         {
-            // Check num lines
+            // Check num lines due to current history element
             int num_lines = 1;
             int curr_line_start = 0;
 
@@ -392,13 +477,13 @@ char * Console::merge()
                     continue;
                 }
 
-		if (col >= this->dim.x)
-		{
-		    /* Would hit edge, wrap back to left */
+                if (col >= this->dim.x)
+                {
+                    /* Would hit edge, wrap back to left */
 
-		    row++;
-		    col = 0;
-		}
+                    row++;
+                    col = 0;
+                }
 
                 // Sets the appropriate char in buffer
                 if (row >= 0 && row < this->dim.y &&

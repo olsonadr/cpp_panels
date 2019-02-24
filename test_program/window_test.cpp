@@ -70,19 +70,25 @@ int main()
      *
      *    // Set Attributes
      *    my_c.setup_input(my_w.find_global_pos("my-console"));
+     *    my_c.set_display_input_line(false);
      *
      *    // Open + Display Window
      *    my_w.open();
      *    my_w.unsafe_clear();
      *    my_w.display();
      *
-     *    // Output Twice
+     *    // Output Three Times
      *    my_c.output("output numero 1");
      *    my_c.output("output number\ndos! (with line-break)");
-     *    my_c.output("yee");
-     *    my_c.output("feel free to input 4 times");
+     *    my_c.output("yee, hit enter for input test...");
      *
      *    // Redisplay and Pause
+     *    my_w.display();
+     *    my_c.pause_and_flush();
+     *
+     *    // Prompt Input and Display
+     *    my_c.set_display_input_line(true);
+     *    my_c.output("feel free to input 4 times");
      *    my_w.display();
      *
      *    // Get Input and Output About It
@@ -97,6 +103,7 @@ int main()
      *    }
      *
      *    // Prompt Last Enter
+     *    my_c.set_display_input_line(false);
      *    my_c.output("Hit enter to quit...");
      *
      *    // Redisplay and Pause

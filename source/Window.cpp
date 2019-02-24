@@ -33,9 +33,9 @@ void Window::operator=(const Window & old_window)
 void Window::display()
 {
     merge();
-    //printf("\e[H"); // Set cursor to top-left corner
+    printf("\e[H"); // Set cursor to top-left corner
     printf(merged_arr);
-    //printf("\e[H"); // Set cursor to top-left corner
+    printf("\e[H"); // Set cursor to top-left corner
 }
 
 /*

@@ -6,7 +6,7 @@
 
 #include "Alert.hpp"
 
-// Constructors
+// Constructors + Operators + Destructors
 /*
  * Parameterized Constructor
  */
@@ -42,7 +42,9 @@ Alert::Alert(const Alert & old_alert, bool is_dynamic)
 }
 
 
-// Overloaded Assignment
+/*
+ * Overloaded Assignment
+ */
 void Alert::operator=(const Alert & old_alert)
 {
     make_invisible();
@@ -54,7 +56,6 @@ void Alert::operator=(const Alert & old_alert)
 }
 
 
-// Destructor
 /*
  * Deletes all used dynamic memory.
  */

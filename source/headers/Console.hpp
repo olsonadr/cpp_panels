@@ -21,25 +21,26 @@ class Console : public Element
     protected:
         //Fields
         struct int_duple dim;	    /* Dimensions of the container */
-	char * merged_arr;	    /* The merged array returned by merge() */
+        char * merged_arr;	    /* The merged array returned by merge() */
         char ** history;	    /* The history of inputs and outputs */
-	int history_num;	    /* The number of strings in history */
+        int history_num;	    /* The number of strings in history */
         int history_len;	    /* The maximum length of the history */
         struct int_duple input_pos; /* The global position of the input cursor */
-	const char * input_prefix;  /* The string preceding the input field */
-	int input_prefix_len;	    /* The length of the input prefix */
+        const char * input_prefix;  /* The string preceding the input field */
+        int input_prefix_len;	    /* The length of the input prefix */
         char bg_char;		    /* The character to be put in empty space */
         struct termios term_info;   /* The termios allowing for echo manip, etc */
+        bool display_input_line;    /* Whether the input area should be displayed */
 
         // Functions
         void move_input();	    /* Moves cursor to the input pos */
         void move_home();	    /* Moves cursor back home */
         void cursor_visible();	    /* Makes the cursor visible */
         void cursor_invisible();    /* Makes the cursor invisible */
-	void enable_echo();	    /* Enables echo in console */
-	void disable_echo();	    /* Disables echo in console */
-	void enable_wrap();	    /* Enables line-wrapping in terminal */
-	void disable_wrap();	    /* Disables line-wrapping in terminal */
+        void enable_echo();	    /* Enables echo in console */
+        void disable_echo();	    /* Disables echo in console */
+        void enable_wrap();	    /* Enables line-wrapping in terminal */
+        void disable_wrap();	    /* Disables line-wrapping in terminal */
 
     public:
         // Constructors, Operators, and Destructors
@@ -48,11 +49,11 @@ class Console : public Element
                 const char * name = "Console");
 
         Console(const Console & old_console,
-		bool is_dynamic = STATIC_ELEMENT);
+                bool is_dynamic = STATIC_ELEMENT);
 
-	void operator=(const Console & old_console);
+        void operator=(const Console & old_console);
 
-	~Console();
+        ~Console();
 
         // Accessors
         int_duple get_dim() { return this->dim; }
@@ -60,20 +61,23 @@ class Console : public Element
 
         // Mutators
         void setup_input(struct int_duple g_console_pos);
-	void set_input_prefix(const char * input_prefix);
+        void set_input_prefix(const char * input_prefix);
+        void set_display_input_line(bool new_val);
         void set_bg_char(char new_bg_char);
-	void reset_merged();
-	char * merge();
+        void reset_merged();
+        char * merge();
 
-	// I/O
-        void input(char * input_buff,
-		int input_buff_size = MAX_INPUT_SIZE);
-	const char * input();
+        // I/O
+        void input(char * input_buff, int input_buff_size = MAX_INPUT_SIZE);
+        const char * input();
         void output(const char * line);
-	void clear();
+        void clear();
 
-	// Misc
-	void pause_and_flush();
+        // Misc
+        void pause_and_flush();
+
+        // Debug
+        bool get_display_input() { return this - display_input_line; }
 };
 
 #endif

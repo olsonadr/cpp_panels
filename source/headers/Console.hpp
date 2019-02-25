@@ -35,12 +35,7 @@ class Console : public Element
         // Functions
         void move_input();	    /* Moves cursor to the input pos */
         void move_home();	    /* Moves cursor back home */
-        void cursor_visible();	    /* Makes the cursor visible */
-        void cursor_invisible();    /* Makes the cursor invisible */
-        void enable_echo();	    /* Enables echo in console */
-        void disable_echo();	    /* Disables echo in console */
-        void enable_wrap();	    /* Enables line-wrapping in terminal */
-        void disable_wrap();	    /* Disables line-wrapping in terminal */
+
 
     public:
         // Constructors, Operators, and Destructors
@@ -69,15 +64,22 @@ class Console : public Element
 
         // I/O
         void input(char * input_buff, int input_buff_size = MAX_INPUT_SIZE);
-        const char * input();
         void output(const char * line);
         void clear();
 
         // Misc
         void pause_and_flush();
 
+	// Reasonably Public Terminal Controls
+        void cursor_visible();	    /* Makes the cursor visible */
+        void cursor_invisible();    /* Makes the cursor invisible */
+        void enable_echo();	    /* Enables echo in console */
+        void disable_echo();	    /* Disables echo in console */
+        void enable_wrap();	    /* Enables line-wrapping in terminal */
+        void disable_wrap();	    /* Disables line-wrapping in terminal */
+
         // Debug
-        bool get_display_input() { return this - display_input_line; }
+        bool get_display_input() { return this->display_input_line; }
 };
 
 #endif

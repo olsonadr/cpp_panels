@@ -22,9 +22,6 @@ class List : public Container
         int padding;
         int margins;
 
-        // Methods
-        // void update();
-
     public:
         // Constructors + Destructors + Operators
         List(int pos_x, int pos_y,

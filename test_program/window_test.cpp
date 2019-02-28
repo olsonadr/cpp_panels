@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <time.h>
 
+void test(Window & w, Label & l);
+
 int main()
 {
     /* Alert Test */
@@ -251,6 +253,7 @@ int main()
      *    Label l4(8, 2, "Should be cut -> Occluded?", STATIC_ELEMENT);
      *    Label l5(0, 20, "Should move!", STATIC_ELEMENT);
      *    Label l6(width - 15, height - 2, "Press enter...", STATIC_ELEMENT);
+     *    Label cpy_test(4, 15, "replaced (cpy)", STATIC_ELEMENT);
      *    Label frame_count(1, 1, "Press Enter for 10000 display calls...", STATIC_ELEMENT);
      *    frame_count.make_invisible();
      *    Border b('*', '-', '|', STATIC_ELEMENT);
@@ -268,6 +271,7 @@ int main()
      *    w.add(&l6);
      *    w.add(b);
      *    w.add(frame_count);
+     *    w.add(cpy_test);
      *
      *    // Seting up and displaying the Window
      *    w.open();
@@ -282,6 +286,9 @@ int main()
      *    l5.set_pos(6, 22);
      *    b.set_corner_char('+');
      *    frame_count.make_visible();
+     *
+     *    // Testing Label set_str_cpy()
+     *    test(w, cpy_test);
      *
      *    // Redisplaying Window
      *    w.display();
@@ -315,4 +322,10 @@ int main()
 
 
     return 0;
+}
+
+void test(Window & w, Label & l)
+{
+    const char * wow = "amazing grace";
+    l.set_str_cpy(wow);
 }

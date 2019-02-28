@@ -158,16 +158,6 @@ void Container::grow_members()
 }
 
 /*
- * Sets the background character that is treated as empty space (that displays
- * the stuff behind it) when seen by merge.
- */
-void Container::set_bg_char(char new_bg_char)
-{
-    this->bg_char = new_bg_char;
-    this->has_changed = true;
-}
-
-/*
  * Resets the merged buffer back to 'empty' state full of spaces with \n chars
  * at the end of each line (using bg_char to fill terminal).
  */
@@ -210,6 +200,16 @@ void Container::add(Element & passed_element)
     this->members[n_members] = &passed_element;
 
     this->n_members += 1;
+    this->has_changed = true;
+}
+
+/*
+ * Sets the background character that is treated as empty space (that displays
+ * the stuff behind it) when seen by merge.
+ */
+void Container::set_bg_char(char new_bg_char)
+{
+    this->bg_char = new_bg_char;
     this->has_changed = true;
 }
 
@@ -379,13 +379,6 @@ char * Container::merge()
                     int message_x, message_y;
                     message_x = alert_x + (alert_width / 2) - (message_width / 2);
                     message_y = alert_y + (alert_height / 2) - (message_height / 2);
-
-                    /* debug */
-                    //printf("alert_x = %d, alert_y = %d\nalert_width = %d, alert_height= %d\nmessage_x = %d, message_y = %d\nmessage_width = %d, message_height = %d\n",
-                    //       alert_x, alert_y, alert_width, alert_height,
-                    //       message_x, message_y, message_width, message_height);
-                    //getchar();
-                    /* end debug */
 
                     int row = 0;
                     int col = 0;

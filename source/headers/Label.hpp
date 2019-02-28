@@ -20,6 +20,7 @@ class Label : public Element
         const char * str;
         int len;
         bool is_vertical;
+        bool dynamic_str;
 
     public:
         // Constructors + Destructors + Overloaded Assignment
@@ -34,13 +35,11 @@ class Label : public Element
               bool is_dynamic,
               const char * name = "Label");
 
-        Label(const Label & old_label, bool is_dynamic = STATIC_ELEMENT)
-            : Element(old_label, is_dynamic),
-              str(old_label.str),
-              len(old_label.len),
-              is_vertical(old_label.is_vertical) {}
+        Label(const Label & old_label, bool is_dynamic = STATIC_ELEMENT);
 
         void operator=(const Label & old_label);
+
+        ~Label();
 
         // Accessors
         const char * get_str() { return this->str; }
@@ -50,14 +49,16 @@ class Label : public Element
         // Mutators
         void set_str(const char * new_val,
                      bool is_vertical = HORIZONTAL_LABEL);
+        void set_str_cpy(const char * new_val,
+                         bool is_vertical = HORIZONTAL_LABEL);
         void set_is_vertical(bool is_vertical);
 
         // Misc
         int get_x_span(); /* Determines the number of characters
-                       this Label spans horizontally */
+                             this Label spans horizontally */
 
         int get_y_span(); /* Determines the number of characters
-                       this Label spans vertically */
+                             this Label spans vertically */
 };
 
 #endif

@@ -13,7 +13,7 @@ Label::Label(int pos_x, int pos_y,
              bool is_vertical,
              const char * name)
     : Element(pos_x, pos_y, is_dynamic, "Label", name),
-      str(str), is_vertical(is_vertical)
+      is_vertical(is_vertical), str(str), dynamic_str(false)
 {
     this->len = 0;
 
@@ -28,13 +28,30 @@ Label::Label(int pos_x, int pos_y,
              bool is_dynamic,
              const char * name)
     : Element(pos_x, pos_y, is_dynamic, "Label", name),
-      str(str), is_vertical(HORIZONTAL_LABEL)
+      is_vertical(HORIZONTAL_LABEL), str(str),
+      dynamic_str(false)
 {
     this->len = 0;
 
     while (this->str[len] != '\0')
     {
         this->len++;
+    }
+}
+
+// Copy Constructor
+Label::Label(const Label & old_label, bool is_dynamic)
+    : Element(old_label, is_dynamic),
+      len(old_label.len), str(old_label.str),
+      is_vertical(old_label.is_vertical),
+      dynamic_str(old_label.dynamic_str) {}
+
+// Destructor
+Label::~Label()
+{
+    if (this->dynamic_str == true)
+    {
+        delete[] this->str;
     }
 }
 
@@ -42,27 +59,51 @@ Label::Label(int pos_x, int pos_y,
 void Label::operator=(const Label & old_label)
 {
     Element::operator=(old_label);
-    this->str = old_label.str;
     this->len = old_label.len;
     this->is_vertical = old_label.is_vertical;
+    this->dynamic_str = old_label.dynamic_str;
+    this->str = old_label.str;
 }
 
 // Methods
 /*
- * Sets the str field and len, modifying memory as needed, setting has_changed
+ * Sets the str field and len, modifying memory as needed, setting has_changed.
  */
 void Label::set_str(const char * new_val,
                     bool is_vertical)
 {
     this->has_changed = true;
-    this->str = new_val;
     this->is_vertical = is_vertical;
+    this->dynamic_str = false;
+    this->str = new_val;
     this->len = 0;
 
     while (this->str[len] != '\0')
     {
         this->len++;
     }
+}
+
+/*
+ * Sets the str field and len, copying the passed cstring to new dynamic memory,
+ * modifying memory as needed, setting has_changed.
+ */
+void Label::set_str_cpy(const char * new_val,
+                        bool is_vertical)
+{
+    this->has_changed = true;
+    this->is_vertical = is_vertical;
+    this->len = 0;
+
+    while (new_val[len] != '\0')
+    {
+        this->len++;
+    }
+
+    char * str_buff = new char[this->len + 1];
+    sprintf(str_buff, "%s\0", new_val);
+    this->str = str_buff;
+    this->dynamic_str = true;
 }
 
 /*

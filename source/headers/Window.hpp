@@ -35,6 +35,8 @@ class Window : public Container
 
         void operator=(const Window & old_window);
 
+        ~Window() { this->Container::~Container(); }
+
         // Methods
         void open();
         void close();

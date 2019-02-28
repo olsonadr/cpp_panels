@@ -18,8 +18,7 @@ List::List(int pos_x, int pos_y,
                 (is_vertical == HORIZONTAL_LIST) ? (0) : (other_dimension),
                 is_dynamic, name),
       is_vertical(is_vertical),
-      padding(0),
-      margins(0)
+      padding(0), margins(0)
 {
     this->has_changed = true;
     update();

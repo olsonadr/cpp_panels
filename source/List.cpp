@@ -170,6 +170,11 @@ void List::update()
                 .y = this->dim.y
             };
         }
+
+        // Updating merged_arr
+        delete[] this->merged_arr;
+	this->merged_arr = new char[(this->dim.x + 1) * this->dim.y];
+	this->has_changed = true;
     }
 }
 

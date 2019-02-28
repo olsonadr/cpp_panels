@@ -219,20 +219,17 @@ void Container::set_bg_char(char new_bg_char)
  */
 void Container::add(Element * passed_element)
 {
-    if (strcmp(passed_element->get_type(), "Window") != 0)
+    while (this->n_members + 1 >= this->len_members)
     {
-        while (this->n_members + 1 >= this->len_members)
-        {
-            /* The members arr would be over capacity */
+        /* The members arr would be over capacity */
 
-            grow_members();
-        }
-
-        this->members[n_members] = passed_element;
-
-        this->n_members += 1;
-        this->has_changed = true;
+        grow_members();
     }
+
+    this->members[n_members] = passed_element;
+
+    this->n_members += 1;
+    this->has_changed = true;
 }
 
 /* Remove the Element at passed index from the members array */

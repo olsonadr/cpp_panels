@@ -221,9 +221,9 @@ void Console::enable_echo()
 void Console::disable_echo()
 {
     // Disable Echo
-    tcgetattr(0, &this->term_info);
+    tcgetattr(STDIN_FILENO, &this->term_info);
     this->term_info.c_lflag &= ~ECHO; /* Turn off ECHO */
-    tcsetattr(0, TCSANOW, &this->term_info);
+    tcsetattr(STDIN_FILENO, TCSANOW, &this->term_info);
 }
 
 
@@ -246,16 +246,18 @@ void Console::disable_wrap()
     printf("\e[?7l"); // ANSI sequence, disables line-wrapping
 }
 
+
 /*
  * Disables buffering of input in terminal such that getchar() will be taken without
  * waiting for an <enter> press to take it.
  */
 void Console::enable_buffer()
 {
-    tcgetattr(STDIN_FILENO, &t);	    // Get current terminal info
-    t.c_lflag |= ICANON;		    // Manipulate flag bits
-    tcsetattr(STDIN_FILENO, TCSANOW, &t);   // Apply new settings
+    tcgetattr(STDIN_FILENO, &this->term_info);		// Get current terminal info
+    this->term_info.c_lflag |= ICANON;			// Manipulate flag bits
+    tcsetattr(STDIN_FILENO, TCSANOW, &this->term_info);	// Apply new settings
 }
+
 
 /*
  * Disables buffering of input in terminal such that getchar() will only be taken
@@ -263,9 +265,9 @@ void Console::enable_buffer()
  */
 void Console::disable_buffer()
 {
-    tcgetattr(STDIN_FILENO, &t);	    // Get current terminal info
-    t.c_lflag &= ~ICANON;		    // Manipulate flag bits
-    tcsetattr(STDIN_FILENO, TCSANOW, &t);   // Apply new settings
+    tcgetattr(STDIN_FILENO, &this->term_info);		// Get current terminal info
+    this->term_info.c_lflag &= ~ICANON;			// Manipulate flag bits
+    tcsetattr(STDIN_FILENO, TCSANOW, &this->term_info); // Apply new settings
 }
 
 
@@ -355,6 +357,37 @@ void Console::input(char * input_buff,
     strcat(output_buff, input_buff);
     output(output_buff);
     delete output_buff;
+}
+
+
+/*
+ * Takes input exactly as input() does, but does not move cursor, enable echoing,
+ * make cursor visible, or disable wrapping. Those custom terminal controls can be
+ * modified how you like using this option. If the optional push_to_output boolean
+ * is passed as false, do not push the received input to the output history.
+ */
+void Console::custom_input(char * input_buff,
+                           int input_buff_size,
+                           bool push_to_output)
+{
+    // Get Input and Replace \n with \0
+    fgets(input_buff, input_buff_size, stdin);
+    size_t ln = strlen(input_buff) - 1;
+
+    if (input_buff[ln] == '\n')
+    {
+        input_buff[ln] = '\0';
+    }
+
+    // Push to History and Return
+    if (push_to_output == true)
+    {
+        char * output_buff = new char[input_buff_size + input_prefix_len];
+        strcat(output_buff, input_prefix);
+        strcat(output_buff, input_buff);
+        output(output_buff);
+        delete output_buff;
+    }
 }
 
 

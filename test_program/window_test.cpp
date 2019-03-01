@@ -82,7 +82,7 @@ int main()
      *    // Output Three Times
      *    my_c.output("output numero 1");
      *    my_c.output("output number\ndos! (with line-break)");
-     *    my_c.output("yee, hit enter for input test...");
+     *    my_c.output("\nyee, hit enter for input test...");
      *
      *    // Redisplay and Pause
      *    my_w.display();
@@ -90,7 +90,7 @@ int main()
      *
      *    // Prompt Input and Display
      *    my_c.set_display_input_line(true);
-     *    my_c.output("feel free to input 4 times");
+     *    my_c.output("\nfeel free to input 4 times");
      *    my_w.display();
      *
      *    // Get Input and Output About It
@@ -98,14 +98,36 @@ int main()
      *    {
      *        char buff[100];
      *        char buff2[200];
-     *        my_c.input(buff);
+     *        my_c.input(buff, 100);
      *        sprintf(buff2, "You inputted '%s'\0", buff);
      *        my_c.output(buff2);
      *        my_w.display();
      *    }
      *
-     *    // Prompt Last Enter
+     *    // Prompt unbuffered, redisplay
+     *    my_c.output("\nNow one unbuffered input...");
      *    my_c.set_display_input_line(false);
+     *    my_w.display();
+     *
+     *    // Get unbuffered input
+     *    char buff[2];
+     *    char buff2[200];
+     *    my_c.disable_buffer();
+     *    my_c.custom_input(buff, 2, false);
+     *    my_c.enable_buffer();
+     *    sprintf(buff2, "You pressed '%s'\0", buff);
+     *    my_c.output(buff2);
+     *    my_w.display();
+     *
+     *    // Prompt Clear Enter
+     *    my_c.output("\nHit enter to clear...");
+     *
+     *    // Redisplay and Pause
+     *    my_w.display();
+     *    my_c.pause_and_flush();
+     *
+     *    // Prompt Last Enter
+     *    my_c.clear();
      *    my_c.output("Hit enter to quit...");
      *
      *    // Redisplay and Pause

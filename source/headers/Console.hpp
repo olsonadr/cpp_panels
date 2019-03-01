@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <stdio.h>
+#include <unistd.h>
 #include <termios.h>
 #include "Element.hpp"
 
@@ -64,21 +65,24 @@ class Console : public Element
 
         // I/O
         void input(char * input_buff, int input_buff_size = MAX_INPUT_SIZE);
+        void custom_input(char * input_buff,
+                          int input_buff_size = MAX_INPUT_SIZE,
+                          bool push_to_output = true);
         void output(const char * line);
         void clear();
 
         // Misc
         void pause_and_flush();
 
-	// Reasonably Public Terminal Controls
+        // Reasonably Public Terminal Controls
         void cursor_visible();	    /* Makes the cursor visible */
         void cursor_invisible();    /* Makes the cursor invisible */
         void enable_echo();	    /* Enables echo in console */
         void disable_echo();	    /* Disables echo in console */
         void enable_wrap();	    /* Enables line-wrapping in terminal */
         void disable_wrap();	    /* Disables line-wrapping in terminal */
-	void enable_buffer();	    /* Enables buffering of input in terminal */
-	void disable_buffer();	    /* Disables buffering of input in terminal */
+        void enable_buffer();	    /* Enables buffering of input in terminal */
+        void disable_buffer();	    /* Disables buffering of input in terminal */
 
         // Debug
         bool get_display_input() { return this->display_input_line; }

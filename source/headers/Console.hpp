@@ -64,8 +64,8 @@ class Console : public Element
         char * merge();
 
         // I/O
-        void input(char *& input_buff, int input_buff_size = MAX_INPUT_SIZE);
-        void custom_input(char *& input_buff,
+        void input(char * input_buff, int input_buff_size = MAX_INPUT_SIZE);
+        void custom_input(char * input_buff,
                           int input_buff_size = MAX_INPUT_SIZE,
                           bool push_to_output = true);
         void output(const char * line);

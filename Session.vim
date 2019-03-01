@@ -35,8 +35,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -47,7 +47,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((45 * winheight(0) + 25) / 51)
+let s:l = 48 - ((37 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -65,15 +65,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((45 * winheight(0) + 25) / 51)
+let s:l = 48 - ((37 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 48
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/Container.hpp
 set splitbelow splitright
@@ -88,8 +88,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -100,7 +100,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 30 - ((29 * winheight(0) + 25) / 51)
+let s:l = 30 - ((29 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -118,15 +118,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 46 - ((45 * winheight(0) + 25) / 51)
+let s:l = 37 - ((36 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-46
+37
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/Panel.hpp
 set splitbelow splitright
@@ -147,7 +147,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((21 * winheight(0) + 25) / 51)
+let s:l = 23 - ((17 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -167,8 +167,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -179,12 +179,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((26 * winheight(0) + 25) / 51)
+let s:l = 28 - ((21 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 28
-normal! 020|
+normal! 018|
 wincmd w
 argglobal
 if bufexists("source/Window.cpp") | buffer source/Window.cpp | else | edit source/Window.cpp | endif
@@ -197,15 +197,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 38 - ((36 * winheight(0) + 25) / 51)
+let s:l = 38 - ((30 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 38
 normal! 04|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/Label.hpp
 set splitbelow splitright
@@ -220,8 +220,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -232,7 +232,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 15 - ((13 * winheight(0) + 25) / 51)
+let s:l = 15 - ((11 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -250,15 +250,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((45 * winheight(0) + 25) / 51)
+let s:l = 48 - ((37 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 48
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/Border.hpp
 set splitbelow splitright
@@ -273,8 +273,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -285,7 +285,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 44 - ((41 * winheight(0) + 25) / 51)
+let s:l = 44 - ((34 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -303,15 +303,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 18 - ((16 * winheight(0) + 25) / 51)
+let s:l = 18 - ((13 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 18
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/Alert.hpp
 set splitbelow splitright
@@ -326,8 +326,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -338,7 +338,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((26 * winheight(0) + 25) / 51)
+let s:l = 28 - ((21 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -356,15 +356,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 13 - ((12 * winheight(0) + 25) / 51)
+let s:l = 13 - ((10 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 13
 normal! 034|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/List.hpp
 set splitbelow splitright
@@ -379,8 +379,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -391,7 +391,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 30 - ((28 * winheight(0) + 25) / 51)
+let s:l = 30 - ((23 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -409,15 +409,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((21 * winheight(0) + 25) / 51)
+let s:l = 23 - ((17 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 23
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit source/headers/Console.hpp
 set splitbelow splitright
@@ -432,8 +432,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -444,7 +444,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((45 * winheight(0) + 25) / 51)
+let s:l = 48 - ((37 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -462,15 +462,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 11 - ((10 * winheight(0) + 25) / 51)
+let s:l = 11 - ((8 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 11
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
-exe 'vert 2resize ' . ((&columns * 101 + 101) / 203)
+exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
+exe 'vert 2resize ' . ((&columns * 84 + 84) / 168)
 tabnext
 edit makefile
 set splitbelow splitright
@@ -491,7 +491,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 25) / 51)
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -517,7 +517,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 36 - ((34 * winheight(0) + 25) / 51)
+let s:l = 36 - ((25 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt

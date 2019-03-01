@@ -5,6 +5,7 @@ CPP_DIR=./source
 OUT_DIR=./build
 
 all: shared
+.PHONY: shared static clean
 shared: lib$(LIBRARY).so $(OUT_DIR)
 static: lib$(LIBRARY).a $(OUT_DIR)
 

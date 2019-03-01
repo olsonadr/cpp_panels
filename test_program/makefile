@@ -6,6 +6,7 @@ HPP_DIR=../source/headers
 LIB_DIR=lib
 
 all: shared
+.PHONY: $(LIB_DIR)/lib$(LIB_NAME).a $(LIB_DIR)/lib$(LIB_NAME).so clean
 
 static: $(LIB_DIR) $(INTERFACE).cpp $(LIB_DIR)/lib$(LIB_NAME).a
 	$(CC) -std=c++11 -g -I$(HPP_DIR) $(INTERFACE).cpp -o $(EXE_FILE) $(LIB_DIR)/lib$(LIB_NAME).a

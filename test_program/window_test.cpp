@@ -119,62 +119,60 @@ int main()
 
 
     /* List Test */
-    /*
-     *     // Setup
-     *     int list_x = 4, list_y = 2, other_dim = 10;
-     *     Window my_window(100, 40);
-     *     List my_list(list_x, list_y, other_dim, STATIC_ELEMENT, VERTICAL_LIST);
-     *     Border my_border('+', '-', '|', STATIC_ELEMENT);
-     *     Label first_label(0, 0, "Skr1234567890t!", STATIC_ELEMENT);
-     *     Label second_label(0, 0, "Second skrt!", STATIC_ELEMENT);
-     *     Label prompt(100 - 11, 40 - 1, "Press enter", STATIC_ELEMENT);
-     *
-     *     // Set attributes
-     *     my_list.set_padding(1);
-     *     my_window.set_bg_char('.');
-     *     my_list.set_bg_char(' ');
-     *
-     *     // Add Labels to my_list
-     *     my_list.add(first_label);
-     *     my_list.add(second_label);
-     *     my_list.update();
-     *
-     *     // Add my_list to window
-     *     my_window.add(my_list);
-     *     my_window.add(prompt);
-     *
-     *     // Open Window
-     *     my_window.open();
-     *     my_window.unsafe_clear();
-     *     my_window.display();
-     *     getchar(); // FIRST PAUSE ----------------------------------------------------*
-     *
-     *     // Add margins, padding, and border
-     *     my_list.set_margins(1);
-     *     my_list.set_padding(2);
-     *     my_list.add(my_border);
-     *
-     *     // Redisplay
-     *     my_window.display();
-     *     getchar(); // SECOND PAUSE ---------------------------------------------------*
-     *
-     *     // Make horizontal
-     *     my_list.set_is_vertical(HORIZONTAL_LIST, 3);
-     *
-     *     // Redisplay
-     *     my_window.display();
-     *     getchar(); // THIRD PAUSE ----------------------------------------------------*
-     *
-     *     // Toggle visibility of first label
-     *     first_label.make_invisible();
-     *
-     *     // Redisplay
-     *     my_window.display();
-     *     getchar(); // FOURTH PAUSE ---------------------------------------------------*
-     *
-     *     // Cleanup
-     *     my_window.close();
-     */
+    // Setup
+    int list_x = 4, list_y = 2, other_dim = 10;
+    Window my_window(100, 40);
+    List my_list(list_x, list_y, other_dim, STATIC_ELEMENT, VERTICAL_LIST);
+    Border my_border('+', '-', '|', STATIC_ELEMENT);
+    Label first_label(0, 0, "Skr1234567890t!", STATIC_ELEMENT);
+    Label second_label(0, 0, "Second skrt!", STATIC_ELEMENT);
+    Label prompt(100 - 11, 40 - 1, "Press enter", STATIC_ELEMENT);
+
+    // Set attributes
+    my_list.set_padding(1);
+    my_window.set_bg_char('.');
+    my_list.set_bg_char(' ');
+
+    // Add Labels to my_list
+    my_list.add(first_label);
+    my_list.add(second_label);
+    my_list.update();
+
+    // Add my_list to window
+    my_window.add(my_list);
+    my_window.add(prompt);
+
+    // Open Window
+    my_window.open();
+    my_window.unsafe_clear();
+    my_window.display();
+    getchar(); // FIRST PAUSE ----------------------------------------------------*
+
+    // Add margins, padding, and border
+    my_list.set_margins(1);
+    my_list.set_padding(2);
+    my_list.add(my_border);
+
+    // Redisplay
+    my_window.display();
+    getchar(); // SECOND PAUSE ---------------------------------------------------*
+
+    // Make horizontal
+    my_list.set_is_vertical(HORIZONTAL_LIST, 3);
+
+    // Redisplay
+    my_window.display();
+    getchar(); // THIRD PAUSE ----------------------------------------------------*
+
+    // Toggle visibility of first label
+    first_label.make_invisible();
+
+    // Redisplay
+    my_window.display();
+    getchar(); // FOURTH PAUSE ---------------------------------------------------*
+
+    // Cleanup
+    my_window.close();
     /* End List Test */
 
 

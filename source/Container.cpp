@@ -121,7 +121,7 @@ Container::~Container()
 {
     for (int i = 0; i < this->n_members; i++)
     {
-        if (this->members[i]->get_is_dynamic())
+        if (this->members[i]->get_is_dynamic() == DYNAMIC_ELEMENT)
         {
             delete this->members[i];
         }

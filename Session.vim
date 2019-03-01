@@ -47,7 +47,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((47 * winheight(0) + 26) / 53)
+let s:l = 48 - ((45 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -65,7 +65,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((47 * winheight(0) + 26) / 53)
+let s:l = 48 - ((45 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -100,11 +100,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 26) / 53)
+let s:l = 30 - ((29 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+30
 normal! 02|
 wincmd w
 argglobal
@@ -118,11 +118,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 47 - ((46 * winheight(0) + 26) / 53)
+let s:l = 46 - ((45 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-47
+46
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 101 + 101) / 203)
@@ -147,7 +147,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((22 * winheight(0) + 26) / 53)
+let s:l = 23 - ((21 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -179,7 +179,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((27 * winheight(0) + 26) / 53)
+let s:l = 28 - ((26 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -197,7 +197,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 38 - ((37 * winheight(0) + 26) / 53)
+let s:l = 38 - ((36 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -232,7 +232,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 15 - ((14 * winheight(0) + 26) / 53)
+let s:l = 15 - ((13 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -250,7 +250,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((47 * winheight(0) + 26) / 53)
+let s:l = 48 - ((45 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -285,7 +285,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 44 - ((43 * winheight(0) + 26) / 53)
+let s:l = 44 - ((41 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -303,7 +303,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 18 - ((17 * winheight(0) + 26) / 53)
+let s:l = 18 - ((16 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -338,7 +338,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((27 * winheight(0) + 26) / 53)
+let s:l = 28 - ((26 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -356,7 +356,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 13 - ((12 * winheight(0) + 26) / 53)
+let s:l = 13 - ((12 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -391,7 +391,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 30 - ((29 * winheight(0) + 26) / 53)
+let s:l = 30 - ((28 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -409,7 +409,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((22 * winheight(0) + 26) / 53)
+let s:l = 23 - ((21 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -444,7 +444,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 48 - ((47 * winheight(0) + 26) / 53)
+let s:l = 48 - ((45 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -462,7 +462,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 11 - ((10 * winheight(0) + 26) / 53)
+let s:l = 11 - ((10 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -491,7 +491,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 26) / 53)
+let s:l = 1 - ((0 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -517,32 +517,32 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 36 - ((35 * winheight(0) + 26) / 53)
+let s:l = 36 - ((34 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 36
 normal! 079|
 tabnext 2
-badd +94 source/Element.cpp
 badd +49 source/headers/Element.hpp
-badd +0 source/Label.cpp
-badd +15 source/headers/Label.hpp
-badd +47 source/Container.cpp
-badd +12 source/headers/Container.hpp
-badd +0 source/Border.cpp
-badd +44 source/headers/Border.hpp
-badd +13 source/Alert.cpp
-badd +28 source/headers/Alert.hpp
+badd +30 source/headers/Container.hpp
 badd +23 source/headers/Panel.hpp
-badd +0 source/List.cpp
-badd +30 source/headers/List.hpp
-badd +0 source/Console.cpp
-badd +0 source/Window.cpp
 badd +28 source/headers/Window.hpp
-badd +0 makefile
-badd +0 README.md
-badd +0 source/headers/Console.hpp
+badd +15 source/headers/Label.hpp
+badd +44 source/headers/Border.hpp
+badd +28 source/headers/Alert.hpp
+badd +30 source/headers/List.hpp
+badd +1 source/headers/Console.hpp
+badd +1 makefile
+badd +1 README.md
+badd +94 source/Element.cpp
+badd +47 source/Container.cpp
+badd +1 source/Window.cpp
+badd +1 source/Label.cpp
+badd +1 source/Border.cpp
+badd +13 source/Alert.cpp
+badd +1 source/List.cpp
+badd +1 source/Console.cpp
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

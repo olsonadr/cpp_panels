@@ -119,7 +119,9 @@ void List::update()
                         curr_line += curr_member->get_x_span();
                     }
                 }
-                else if (strcmp(this->members[i]->get_type(), "Container") == 0)
+                else if (strcmp(this->members[i]->get_type(), "Panel") == 0 ||
+                         strcmp(this->members[i]->get_type(), "List") == 0  ||
+                         strcmp(this->members[i]->get_type(), "Panel") == 0)
                 {
                     /* If member is a Container */
 
@@ -171,8 +173,8 @@ void List::update()
 
         // Updating merged_arr
         delete[] this->merged_arr;
-	this->merged_arr = new char[(this->dim.x + 1) * this->dim.y + 1];
-	this->has_changed = true;
+        this->merged_arr = new char[(this->dim.x + 1) * this->dim.y + 1];
+        this->has_changed = true;
     }
 }
 

@@ -77,6 +77,8 @@ class Console : public Element
         void disable_echo();	    /* Disables echo in console */
         void enable_wrap();	    /* Enables line-wrapping in terminal */
         void disable_wrap();	    /* Disables line-wrapping in terminal */
+	void enable_buffer();	    /* Enables buffering of input in terminal */
+	void disable_buffer();	    /* Disables buffering of input in terminal */
 
         // Debug
         bool get_display_input() { return this->display_input_line; }

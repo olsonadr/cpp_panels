@@ -16,7 +16,7 @@ List::List(int pos_x, int pos_y,
     : Container(pos_x, pos_y,
                 (is_vertical == VERTICAL_LIST) ? (other_dimension) : (0),
                 (is_vertical == HORIZONTAL_LIST) ? (0) : (other_dimension),
-                is_dynamic, name),
+                is_dynamic, "List", name),
       is_vertical(is_vertical),
       padding(0), margins(0)
 {
@@ -31,7 +31,7 @@ List::List(int pos_x, int pos_y,
     : Container(pos_x, pos_y,
                 (is_vertical == VERTICAL_LIST) ? (other_dimension) : (0),
                 (is_vertical == HORIZONTAL_LIST) ? (0) : (other_dimension),
-                is_dynamic, name),
+                is_dynamic, "List", name),
       is_vertical(VERTICAL_LIST),
       padding(0), margins(0)
 {

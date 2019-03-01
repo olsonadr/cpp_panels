@@ -100,12 +100,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 30 - ((29 * winheight(0) + 21) / 42)
+let s:l = 36 - ((35 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-30
-normal! 02|
+36
+normal! 015|
 wincmd w
 argglobal
 if bufexists("source/Container.cpp") | buffer source/Container.cpp | else | edit source/Container.cpp | endif
@@ -147,12 +147,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((17 * winheight(0) + 21) / 42)
+let s:l = 6 - ((5 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-23
-normal! 0
+6
+normal! 042|
 tabnext
 edit source/headers/Window.hpp
 set splitbelow splitright
@@ -179,7 +179,7 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 28 - ((21 * winheight(0) + 21) / 42)
+let s:l = 28 - ((6 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -391,12 +391,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 30 - ((23 * winheight(0) + 21) / 42)
+let s:l = 41 - ((31 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-30
-normal! 014|
+41
+normal! 0
 wincmd w
 argglobal
 if bufexists("source/List.cpp") | buffer source/List.cpp | else | edit source/List.cpp | endif
@@ -409,11 +409,11 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 23 - ((17 * winheight(0) + 21) / 42)
+let s:l = 61 - ((36 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-23
+61
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 83 + 84) / 168)
@@ -525,18 +525,18 @@ normal! zt
 normal! 079|
 tabnext 2
 badd +49 source/headers/Element.hpp
-badd +30 source/headers/Container.hpp
+badd +56 source/headers/Container.hpp
 badd +23 source/headers/Panel.hpp
 badd +28 source/headers/Window.hpp
 badd +15 source/headers/Label.hpp
 badd +44 source/headers/Border.hpp
 badd +28 source/headers/Alert.hpp
-badd +30 source/headers/List.hpp
-badd +1 source/headers/Console.hpp
+badd +41 source/headers/List.hpp
+badd +28 source/headers/Console.hpp
 badd +1 makefile
 badd +1 README.md
 badd +94 source/Element.cpp
-badd +47 source/Container.cpp
+badd +190 source/Container.cpp
 badd +1 source/Window.cpp
 badd +1 source/Label.cpp
 badd +1 source/Border.cpp

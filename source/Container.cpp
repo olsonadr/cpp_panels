@@ -10,7 +10,8 @@
 Container::Container(int pos_x, int pos_y,
                      int width, int height,
                      bool is_dynamic,
-                     const char * type, const char * name)
+                     const char * type,
+		     const char * name)
     : Element(pos_x, pos_y, is_dynamic, type, name),
       members(new Element * [1]), n_members(0),
       len_members(1), bg_char(' ')

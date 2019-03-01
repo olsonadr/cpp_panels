@@ -35,6 +35,8 @@ class Element
 
         void operator=(const Element & old_element);
 
+	virtual ~Element() {}
+
         // Accessors
         int_duple get_pos() { return this->pos; }
         const char * get_name() { return this->name; }

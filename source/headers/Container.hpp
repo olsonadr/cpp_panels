@@ -57,7 +57,7 @@ class Container : public Element
         void add(Element * passed_element);
         void remove(int index);
         virtual bool get_has_changed();
-        char * merge();
+        virtual char * merge();
 
         // Misc
         Element * find(const char * name);

@@ -171,7 +171,7 @@ void List::update()
 
         // Updating merged_arr
         delete[] this->merged_arr;
-	this->merged_arr = new char[(this->dim.x + 1) * this->dim.y];
+	this->merged_arr = new char[(this->dim.x + 1) * this->dim.y + 1];
 	this->has_changed = true;
     }
 }

@@ -46,7 +46,7 @@ void Window::open()
 {
     printf("\e[?25l"); // ANSI sequence, makes cursor invisible
     resize_terminal();
-    merge();
+    Container::merge();
 
     // Disable Echo
     tcgetattr(0, &this->term_info);

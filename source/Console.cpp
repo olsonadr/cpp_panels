@@ -158,7 +158,7 @@ Console::~Console()
 
 
 
-// Protected Functions
+// Public Terminal-Control Functions
 
 /*
  * Moves the terminal cursor to the input_pos coord. Setup input first!
@@ -246,6 +246,27 @@ void Console::disable_wrap()
     printf("\e[?7l"); // ANSI sequence, disables line-wrapping
 }
 
+/*
+ * Disables buffering of input in terminal such that getchar() will be taken without
+ * waiting for an <enter> press to take it.
+ */
+void Console::enable_buffer()
+{
+    tcgetattr(STDIN_FILENO, &t);	    // Get current terminal info
+    t.c_lflag |= ICANON;		    // Manipulate flag bits
+    tcsetattr(STDIN_FILENO, TCSANOW, &t);   // Apply new settings
+}
+
+/*
+ * Disables buffering of input in terminal such that getchar() will only be taken
+ * after waiting for an <enter> press.
+ */
+void Console::disable_buffer()
+{
+    tcgetattr(STDIN_FILENO, &t);	    // Get current terminal info
+    t.c_lflag &= ~ICANON;		    // Manipulate flag bits
+    tcsetattr(STDIN_FILENO, TCSANOW, &t);   // Apply new settings
+}
 
 
 
@@ -427,7 +448,7 @@ char * Console::merge()
         // Input line
         if (this->display_input_line == true)
         {
-	    /* The input line should be rendered */
+            /* The input line should be rendered */
 
             for (int col = 0; col < strlen(this->input_prefix); col++)
             {

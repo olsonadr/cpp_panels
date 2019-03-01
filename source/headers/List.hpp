@@ -49,7 +49,6 @@ class List : public Container
 
         // Overriden
         char * merge();
-
         void update();
 };
 

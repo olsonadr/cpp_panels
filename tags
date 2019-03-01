@@ -1,0 +1,202 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ALERT_HPP	./source/headers/Alert.hpp	8;"	d
+Alert	./source/Alert.cpp	/^Alert::Alert(const Alert & old_alert, bool is_dynamic)$/;"	f	class:Alert
+Alert	./source/Alert.cpp	/^Alert::Alert(const char * message,$/;"	f	class:Alert
+Alert	./source/headers/Alert.hpp	/^class Alert : public Element$/;"	c
+BORDER_HPP	./source/headers/Border.hpp	10;"	d
+Border	./source/Border.cpp	/^Border::Border(char corners,$/;"	f	class:Border
+Border	./source/Border.cpp	/^Border::Border(const Border & old_border, bool is_dynamic)$/;"	f	class:Border
+Border	./source/headers/Border.hpp	/^class Border : public Element$/;"	c
+CONSOLE_HPP	./source/headers/Console.hpp	9;"	d
+CONTAINER_HPP	./source/headers/Container.hpp	8;"	d
+Console	./source/Console.cpp	/^Console::Console(const Console & old_console, bool is_dynamic)$/;"	f	class:Console
+Console	./source/Console.cpp	/^Console::Console(int pos_x, int pos_y,$/;"	f	class:Console
+Console	./source/headers/Console.hpp	/^class Console : public Element$/;"	c
+Container	./source/Container.cpp	/^Container::Container(const Container & old_container, bool is_dynamic)$/;"	f	class:Container
+Container	./source/Container.cpp	/^Container::Container(int pos_x, int pos_y,$/;"	f	class:Container
+Container	./source/headers/Container.hpp	/^class Container : public Element$/;"	c
+DYNAMIC_ELEMENT	./source/headers/Element.hpp	9;"	d
+ELEMENT_HPP	./source/headers/Element.hpp	7;"	d
+Element	./source/Element.cpp	/^Element::Element(const Element & old_element, bool is_dynamic)$/;"	f	class:Element
+Element	./source/Element.cpp	/^Element::Element(int pos_x, int pos_y, bool is_dynamic,$/;"	f	class:Element
+Element	./source/headers/Element.hpp	/^class Element$/;"	c
+HORIZONTAL_LABEL	./source/headers/Label.hpp	11;"	d
+HORIZONTAL_LIST	./source/headers/List.hpp	12;"	d
+LABEL_HPP	./source/headers/Label.hpp	8;"	d
+LIST_HPP	./source/headers/List.hpp	9;"	d
+Label	./source/Label.cpp	/^Label::Label(const Label & old_label, bool is_dynamic)$/;"	f	class:Label
+Label	./source/Label.cpp	/^Label::Label(int pos_x, int pos_y,$/;"	f	class:Label
+Label	./source/headers/Label.hpp	/^class Label : public Element$/;"	c
+List	./source/List.cpp	/^List::List(const List & old_list, bool is_dynamic)$/;"	f	class:List
+List	./source/List.cpp	/^List::List(int pos_x, int pos_y,$/;"	f	class:List
+List	./source/headers/List.hpp	/^class List : public Container$/;"	c
+MAX_INPUT_SIZE	./source/headers/Console.hpp	11;"	d
+PANEL_HPP	./source/headers/Panel.hpp	10;"	d
+Panel	./source/headers/Panel.hpp	/^        Panel(const Panel & old_panel, bool is_dynamic = STATIC_ELEMENT)$/;"	f	class:Panel
+Panel	./source/headers/Panel.hpp	/^        Panel(int pos_x, int pos_y,$/;"	f	class:Panel
+Panel	./source/headers/Panel.hpp	/^class Panel : public Container$/;"	c
+STATIC_ELEMENT	./source/headers/Element.hpp	10;"	d
+VERTICAL_LABEL	./source/headers/Label.hpp	10;"	d
+VERTICAL_LIST	./source/headers/List.hpp	11;"	d
+WINDOW_HPP	./source/headers/Window.hpp	8;"	d
+Window	./source/headers/Window.hpp	/^        Window(const Window & old_window)$/;"	f	class:Window
+Window	./source/headers/Window.hpp	/^        Window(int width, int height,$/;"	f	class:Window
+Window	./source/headers/Window.hpp	/^class Window : public Container$/;"	c
+add	./source/Container.cpp	/^void Container::add(Element & passed_element)$/;"	f	class:Container
+add	./source/Container.cpp	/^void Container::add(Element * passed_element)$/;"	f	class:Container
+bg_char	./source/headers/Alert.hpp	/^        char bg_char;$/;"	m	class:Alert
+bg_char	./source/headers/Console.hpp	/^        char bg_char;		    \/* The character to be put in empty space *\/$/;"	m	class:Console
+bg_char	./source/headers/Container.hpp	/^        char bg_char;	      \/* The character to be put in empty space *\/$/;"	m	class:Container
+border	./source/headers/Alert.hpp	/^        Border * border;$/;"	m	class:Alert
+bottom_char	./source/headers/Border.hpp	/^        char bottom_char;$/;"	m	class:Border
+check_must_update	./source/Container.cpp	/^bool Container::check_must_update()$/;"	f	class:Container
+clear	./source/Console.cpp	/^void Console::clear()$/;"	f	class:Console
+close	./source/Window.cpp	/^void Window::close()$/;"	f	class:Window
+corner_char	./source/headers/Border.hpp	/^        char corner_char;$/;"	m	class:Border
+cursor_invisible	./source/Console.cpp	/^void Console::cursor_invisible()$/;"	f	class:Console
+cursor_visible	./source/Console.cpp	/^void Console::cursor_visible()$/;"	f	class:Console
+dim	./source/headers/Console.hpp	/^        struct int_duple dim;	    \/* Dimensions of the container *\/$/;"	m	class:Console	typeref:struct:Console::int_duple
+dim	./source/headers/Container.hpp	/^        struct int_duple dim; \/* Dimensions of the container *\/$/;"	m	class:Container	typeref:struct:Container::int_duple
+disable_echo	./source/Console.cpp	/^void Console::disable_echo()$/;"	f	class:Console
+disable_wrap	./source/Console.cpp	/^void Console::disable_wrap()$/;"	f	class:Console
+display	./source/Window.cpp	/^void Window::display()$/;"	f	class:Window
+display_input_line	./source/headers/Console.hpp	/^        bool display_input_line;    \/* Whether the input area should be displayed *\/$/;"	m	class:Console
+dynamic_str	./source/headers/Label.hpp	/^        bool dynamic_str;$/;"	m	class:Label
+enable_echo	./source/Console.cpp	/^void Console::enable_echo()$/;"	f	class:Console
+enable_wrap	./source/Console.cpp	/^void Console::enable_wrap()$/;"	f	class:Console
+find	./source/Container.cpp	/^Element * Container::find(const char * name)$/;"	f	class:Container
+find_global_pos	./source/Container.cpp	/^int_duple Container::find_global_pos(const char * name)$/;"	f	class:Container
+get_bg_char	./source/headers/Alert.hpp	/^        char get_bg_char() { return this->bg_char; }$/;"	f	class:Alert
+get_bg_char	./source/headers/Console.hpp	/^        char get_bg_char() { return this->bg_char; }$/;"	f	class:Console
+get_bg_char	./source/headers/Container.hpp	/^        char get_bg_char() { return this->bg_char; }$/;"	f	class:Container
+get_bottom_char	./source/headers/Alert.hpp	/^        char get_bottom_char() { return this->border->get_bottom_char(); }$/;"	f	class:Alert
+get_bottom_char	./source/headers/Border.hpp	/^        char get_bottom_char() { return this->bottom_char; }$/;"	f	class:Border
+get_corner_char	./source/headers/Alert.hpp	/^        char get_corner_char() { return this->border->get_corner_char(); }$/;"	f	class:Alert
+get_corner_char	./source/headers/Border.hpp	/^        char get_corner_char() { return this->corner_char; }$/;"	f	class:Border
+get_dim	./source/headers/Console.hpp	/^        int_duple get_dim() { return this->dim; }$/;"	f	class:Console
+get_dim	./source/headers/Container.hpp	/^        int_duple get_dim() { return this->dim; }$/;"	f	class:Container
+get_display_input	./source/headers/Console.hpp	/^        bool get_display_input() { return this->display_input_line; }$/;"	f	class:Console
+get_has_changed	./source/Alert.cpp	/^bool Alert::get_has_changed()$/;"	f	class:Alert
+get_has_changed	./source/Container.cpp	/^bool Container::get_has_changed()$/;"	f	class:Container
+get_has_changed	./source/headers/Element.hpp	/^        virtual bool get_has_changed() { return this->has_changed; }$/;"	f	class:Element
+get_is_dynamic	./source/headers/Element.hpp	/^        bool get_is_dynamic() { return this->is_dynamic; }$/;"	f	class:Element
+get_is_vertical	./source/headers/Label.hpp	/^        bool get_is_vertical() { return this->is_vertical; }$/;"	f	class:Label
+get_is_vertical	./source/headers/List.hpp	/^        bool get_is_vertical() { return this->is_vertical; }$/;"	f	class:List
+get_is_visible	./source/headers/Element.hpp	/^        bool get_is_visible() { return this->is_visible; }$/;"	f	class:Element
+get_left_char	./source/headers/Alert.hpp	/^        char get_left_char() { return this->border->get_left_char(); }$/;"	f	class:Alert
+get_left_char	./source/headers/Border.hpp	/^        char get_left_char() { return this->left_char; }$/;"	f	class:Border
+get_len	./source/headers/Alert.hpp	/^        int get_len() { return this->len; }$/;"	f	class:Alert
+get_len	./source/headers/Label.hpp	/^        int get_len() { return this->len; }$/;"	f	class:Label
+get_member	./source/headers/Container.hpp	/^        Element * get_member(int index) { return this->members[index]; }$/;"	f	class:Container
+get_message	./source/headers/Alert.hpp	/^        const char * get_message() { return this->message; }$/;"	f	class:Alert
+get_n_members	./source/headers/Container.hpp	/^        int get_n_members() { return this->n_members; }$/;"	f	class:Container
+get_name	./source/headers/Element.hpp	/^        const char * get_name() { return this->name; }$/;"	f	class:Element
+get_pos	./source/headers/Element.hpp	/^        int_duple get_pos() { return this->pos; }$/;"	f	class:Element
+get_right_char	./source/headers/Alert.hpp	/^        char get_right_char() { return this->border->get_right_char(); }$/;"	f	class:Alert
+get_right_char	./source/headers/Border.hpp	/^        char get_right_char() { return this->right_char; }$/;"	f	class:Border
+get_str	./source/headers/Label.hpp	/^        const char * get_str() { return this->str; }$/;"	f	class:Label
+get_top_char	./source/headers/Alert.hpp	/^        char get_top_char() { return this->border->get_top_char(); }$/;"	f	class:Alert
+get_top_char	./source/headers/Border.hpp	/^        char get_top_char() { return this->top_char; }$/;"	f	class:Border
+get_type	./source/headers/Element.hpp	/^        const char * get_type() { return this->type; }$/;"	f	class:Element
+get_x_span	./source/Alert.cpp	/^int Alert::get_x_span()$/;"	f	class:Alert
+get_x_span	./source/Label.cpp	/^int Label::get_x_span()$/;"	f	class:Label
+get_y_span	./source/Alert.cpp	/^int Alert::get_y_span()$/;"	f	class:Alert
+get_y_span	./source/Label.cpp	/^int Label::get_y_span()$/;"	f	class:Label
+grow_members	./source/Container.cpp	/^void Container::grow_members()$/;"	f	class:Container
+has_changed	./source/headers/Element.hpp	/^        bool has_changed;$/;"	m	class:Element
+history	./source/headers/Console.hpp	/^        char ** history;	    \/* The history of inputs and outputs *\/$/;"	m	class:Console
+history_len	./source/headers/Console.hpp	/^        int history_len;	    \/* The maximum length of the history *\/$/;"	m	class:Console
+history_num	./source/headers/Console.hpp	/^        int history_num;	    \/* The number of strings in history *\/$/;"	m	class:Console
+init_height	./source/headers/Window.hpp	/^        int init_width, init_height;$/;"	m	class:Window
+init_width	./source/headers/Window.hpp	/^        int init_width, init_height;$/;"	m	class:Window
+input	./source/Console.cpp	/^void Console::input(char * input_buff,$/;"	f	class:Console
+input_pos	./source/headers/Console.hpp	/^        struct int_duple input_pos; \/* The global position of the input cursor *\/$/;"	m	class:Console	typeref:struct:Console::int_duple
+input_prefix	./source/headers/Console.hpp	/^        const char * input_prefix;  \/* The string preceding the input field *\/$/;"	m	class:Console
+input_prefix_len	./source/headers/Console.hpp	/^        int input_prefix_len;	    \/* The length of the input prefix *\/$/;"	m	class:Console
+int_duple	./source/headers/Element.hpp	/^struct int_duple$/;"	s
+is_dynamic	./source/headers/Element.hpp	/^        bool is_dynamic;$/;"	m	class:Element
+is_vertical	./source/headers/Label.hpp	/^        bool is_vertical;$/;"	m	class:Label
+is_vertical	./source/headers/List.hpp	/^        bool is_vertical;$/;"	m	class:List
+is_visible	./source/headers/Element.hpp	/^        bool is_visible;$/;"	m	class:Element
+left_char	./source/headers/Border.hpp	/^        char left_char;$/;"	m	class:Border
+len	./source/headers/Alert.hpp	/^        int len;$/;"	m	class:Alert
+len	./source/headers/Label.hpp	/^        int len;$/;"	m	class:Label
+len_members	./source/headers/Container.hpp	/^        int len_members;      \/* Length of members arr *\/$/;"	m	class:Container
+make_invisible	./source/Element.cpp	/^void Element::make_invisible()$/;"	f	class:Element
+make_visible	./source/Element.cpp	/^void Element::make_visible()$/;"	f	class:Element
+margins	./source/headers/List.hpp	/^        int margins;$/;"	m	class:List
+mark_has_changed	./source/Element.cpp	/^void Element::mark_has_changed()$/;"	f	class:Element
+members	./source/headers/Container.hpp	/^        Element ** members;   \/* Dynamic array of Element pointers *\/$/;"	m	class:Container
+merge	./source/Console.cpp	/^char * Console::merge()$/;"	f	class:Console
+merge	./source/Container.cpp	/^char * Container::merge()$/;"	f	class:Container
+merge	./source/List.cpp	/^char * List::merge()$/;"	f	class:List
+merged_arr	./source/headers/Console.hpp	/^        char * merged_arr;	    \/* The merged array returned by merge() *\/$/;"	m	class:Console
+merged_arr	./source/headers/Container.hpp	/^        char * merged_arr;    \/* Dynamic 1D arr of chars of merged layers *\/$/;"	m	class:Container
+message	./source/headers/Alert.hpp	/^        const char * message;$/;"	m	class:Alert
+move_home	./source/Console.cpp	/^void Console::move_home()$/;"	f	class:Console
+move_input	./source/Console.cpp	/^void Console::move_input()$/;"	f	class:Console
+n_members	./source/headers/Container.hpp	/^        int n_members;        \/* Number of members in members arr *\/$/;"	m	class:Container
+name	./source/headers/Element.hpp	/^        const char * name;$/;"	m	class:Element
+open	./source/Window.cpp	/^void Window::open()$/;"	f	class:Window
+operator =	./source/Alert.cpp	/^void Alert::operator=(const Alert & old_alert)$/;"	f	class:Alert
+operator =	./source/Border.cpp	/^void Border::operator=(const Border & old_border)$/;"	f	class:Border
+operator =	./source/Console.cpp	/^void Console::operator=(const Console & old_console)$/;"	f	class:Console
+operator =	./source/Container.cpp	/^void Container::operator=(const Container & old_container)$/;"	f	class:Container
+operator =	./source/Element.cpp	/^void Element::operator=(const Element & old_element)$/;"	f	class:Element
+operator =	./source/Label.cpp	/^void Label::operator=(const Label & old_label)$/;"	f	class:Label
+operator =	./source/List.cpp	/^void List::operator=(const List & old_list)$/;"	f	class:List
+operator =	./source/Window.cpp	/^void Window::operator=(const Window & old_window)$/;"	f	class:Window
+operator =	./source/headers/Panel.hpp	/^        void operator=(const Panel & old_panel) { Container::operator=(old_panel); }$/;"	f	class:Panel
+output	./source/Console.cpp	/^void Console::output(const char * line)$/;"	f	class:Console
+padding	./source/headers/List.hpp	/^        int padding;$/;"	m	class:List
+pause_and_flush	./source/Console.cpp	/^void Console::pause_and_flush()$/;"	f	class:Console
+pos	./source/headers/Element.hpp	/^        struct int_duple pos;$/;"	m	class:Element	typeref:struct:Element::int_duple
+remove	./source/Container.cpp	/^void Container::remove(int index)$/;"	f	class:Container
+reset_has_changed	./source/Alert.cpp	/^void Alert::reset_has_changed()$/;"	f	class:Alert
+reset_has_changed	./source/Element.cpp	/^void Element::reset_has_changed()$/;"	f	class:Element
+reset_merged	./source/Console.cpp	/^void Console::reset_merged()$/;"	f	class:Console
+reset_merged	./source/Container.cpp	/^void Container::reset_merged()$/;"	f	class:Container
+reset_terminal	./source/Window.cpp	/^void Window::reset_terminal()$/;"	f	class:Window
+resize_terminal	./source/Window.cpp	/^void Window::resize_terminal()$/;"	f	class:Window
+right_char	./source/headers/Border.hpp	/^        char right_char;$/;"	m	class:Border
+set_bg_char	./source/Alert.cpp	/^void Alert::set_bg_char(char new_bg_char)$/;"	f	class:Alert
+set_bg_char	./source/Console.cpp	/^void Console::set_bg_char(char new_bg_char)$/;"	f	class:Console
+set_bg_char	./source/Container.cpp	/^void Container::set_bg_char(char new_bg_char)$/;"	f	class:Container
+set_border	./source/Alert.cpp	/^void Alert::set_border(Border * new_border)$/;"	f	class:Alert
+set_border	./source/Alert.cpp	/^void Alert::set_border(Border new_border)$/;"	f	class:Alert
+set_bottom_char	./source/headers/Border.hpp	/^        void set_bottom_char(char m_char) { this->bottom_char = m_char; }$/;"	f	class:Border
+set_corner_char	./source/headers/Border.hpp	/^        void set_corner_char(char m_char) { this->corner_char = m_char; }$/;"	f	class:Border
+set_display_input_line	./source/Console.cpp	/^void Console::set_display_input_line(bool new_val)$/;"	f	class:Console
+set_input_prefix	./source/Console.cpp	/^void Console::set_input_prefix(const char * input_prefix)$/;"	f	class:Console
+set_is_vertical	./source/Label.cpp	/^void Label::set_is_vertical(bool is_vertical)$/;"	f	class:Label
+set_is_vertical	./source/List.cpp	/^void List::set_is_vertical(bool new_val, int other_dim)$/;"	f	class:List
+set_left_char	./source/headers/Border.hpp	/^        void set_left_char(char m_char) { this->left_char = m_char; }$/;"	f	class:Border
+set_margins	./source/List.cpp	/^void List::set_margins(int new_margins)$/;"	f	class:List
+set_message	./source/Alert.cpp	/^void Alert::set_message(const char * new_val)$/;"	f	class:Alert
+set_padding	./source/List.cpp	/^void List::set_padding(int new_padding)$/;"	f	class:List
+set_pos	./source/Element.cpp	/^void Element::set_pos(int x, int y)$/;"	f	class:Element
+set_pos	./source/Element.cpp	/^void Element::set_pos(struct int_duple m_pos)$/;"	f	class:Element
+set_right_char	./source/headers/Border.hpp	/^        void set_right_char(char m_char) { this->right_char = m_char; }$/;"	f	class:Border
+set_str	./source/Label.cpp	/^void Label::set_str(const char * new_val,$/;"	f	class:Label
+set_str_cpy	./source/Label.cpp	/^void Label::set_str_cpy(const char * new_val,$/;"	f	class:Label
+set_top_char	./source/headers/Border.hpp	/^        void set_top_char(char m_char) { this->top_char = m_char; }$/;"	f	class:Border
+setup_input	./source/Console.cpp	/^void Console::setup_input(struct int_duple g_console_pos)$/;"	f	class:Console
+str	./source/headers/Label.hpp	/^        const char * str;$/;"	m	class:Label
+term_info	./source/headers/Console.hpp	/^        struct termios term_info;   \/* The termios allowing for echo manip, etc *\/$/;"	m	class:Console	typeref:struct:Console::termios
+term_info	./source/headers/Window.hpp	/^        struct termios term_info;$/;"	m	class:Window	typeref:struct:Window::termios
+toggle_visible	./source/Element.cpp	/^void Element::toggle_visible()$/;"	f	class:Element
+top_char	./source/headers/Border.hpp	/^        char top_char;$/;"	m	class:Border
+type	./source/headers/Element.hpp	/^        const char * type;$/;"	m	class:Element
+unsafe_clear	./source/Window.cpp	/^void Window::unsafe_clear()$/;"	f	class:Window
+update	./source/List.cpp	/^void List::update()$/;"	f	class:List
+x	./source/headers/Element.hpp	/^    int x;$/;"	m	struct:int_duple
+y	./source/headers/Element.hpp	/^    int y;$/;"	m	struct:int_duple
+~Alert	./source/Alert.cpp	/^Alert::~Alert()$/;"	f	class:Alert
+~Console	./source/Console.cpp	/^Console::~Console()$/;"	f	class:Console
+~Container	./source/Container.cpp	/^Container::~Container()$/;"	f	class:Container
+~Label	./source/Label.cpp	/^Label::~Label()$/;"	f	class:Label

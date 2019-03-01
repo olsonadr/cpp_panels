@@ -317,7 +317,15 @@ void Console::set_display_input_line(bool new_val)
  */
 void Console::pause_and_flush()
 {
-    while (getchar() != '\n');
+    while (true)
+    {
+        char in = getchar();
+
+        if (in != '\n' || in != '\0')
+        {
+            break;
+        }
+    }
 }
 
 
@@ -327,7 +335,7 @@ void Console::pause_and_flush()
  * by the second (optional parameter). If you do not set this to the length of
  * the buffer you pass to take input into, it will take the first 100.
  */
-void Console::input(char * input_buff,
+void Console::input(char *& input_buff,
                     int input_buff_size)
 {
     // Setup
@@ -366,7 +374,7 @@ void Console::input(char * input_buff,
  * modified how you like using this option. If the optional push_to_output boolean
  * is passed as false, do not push the received input to the output history.
  */
-void Console::custom_input(char * input_buff,
+void Console::custom_input(char *& input_buff,
                            int input_buff_size,
                            bool push_to_output)
 {

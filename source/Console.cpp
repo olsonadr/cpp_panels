@@ -22,7 +22,8 @@ Console::Console(int pos_x, int pos_y,
       input_prefix_len(3),
       input_prefix(">> "),
       bg_char(' '),
-      display_input_line(true)
+      display_input_line(true),
+      buffer_enabled(true)
 {
     // Contents + ends of lines
     this->merged_arr = new char[(width + 1) * height];
@@ -53,7 +54,8 @@ Console::Console(const Console & old_console, bool is_dynamic)
       input_prefix(old_console.input_prefix),
       input_prefix_len(old_console.input_prefix_len),
       bg_char(old_console.bg_char),
-      display_input_line(old_console.display_input_line)
+      display_input_line(old_console.display_input_line),
+      buffer_enabled(old_console.buffer_enabled)
 {
     // Merged array
     this->merged_arr = new char[old_console.dim.y * old_console.dim.x];
@@ -138,6 +140,7 @@ void Console::operator=(const Console & old_console)
     this->input_prefix_len = old_console.input_prefix_len;
     this->bg_char = old_console.bg_char;
     this->display_input_line = old_console.display_input_line;
+    this->buffer_enabled = old_console.buffer_enabled;
 }
 
 
@@ -253,6 +256,7 @@ void Console::disable_wrap()
  */
 void Console::enable_buffer()
 {
+    this->buffer_enabled = true;
     tcgetattr(STDIN_FILENO, &this->term_info);		// Get current terminal info
     this->term_info.c_lflag |= ICANON;			// Manipulate flag bits
     tcsetattr(STDIN_FILENO, TCSANOW, &this->term_info);	// Apply new settings
@@ -265,6 +269,7 @@ void Console::enable_buffer()
  */
 void Console::disable_buffer()
 {
+    this->buffer_enabled = false;
     tcgetattr(STDIN_FILENO, &this->term_info);		// Get current terminal info
     this->term_info.c_lflag &= ~ICANON;			// Manipulate flag bits
     tcsetattr(STDIN_FILENO, TCSANOW, &this->term_info); // Apply new settings
@@ -333,7 +338,11 @@ void Console::pause_and_flush()
  * Gets user input at the correct input position, adding the user's input
  * to the history list using output(), taking the first n chars as designated
  * by the second (optional parameter). If you do not set this to the length of
- * the buffer you pass to take input into, it will take the first 100.
+ * the buffer you pass to take input into, it will take the first 99.
+ *
+ * The input_buff must always be one larger than the desired number of chars
+ * to be received, so single character inputs should be passed into a input
+ * buffer of size 2 or more.
  */
 void Console::input(char * input_buff,
                     int input_buff_size)
@@ -346,11 +355,20 @@ void Console::input(char * input_buff,
 
     // Get Input and Replace \n with \0
     fgets(input_buff, input_buff_size, stdin);
-    size_t ln = strlen(input_buff) - 1;
 
-    if (input_buff[ln] == '\n')
+    if (this->buffer_enabled == true)
     {
-        input_buff[ln] = '\0';
+        size_t ln = strlen(input_buff) - 1;
+
+        if (input_buff[ln] == '\n')
+        {
+            input_buff[ln] = '\0';
+        }
+    }
+    else
+    {
+        /* Buffer is disabled, only one char is taken */
+        input_buff[1] = '\0';
     }
 
     // Cleanup
@@ -380,11 +398,20 @@ void Console::custom_input(char * input_buff,
 {
     // Get Input and Replace \n with \0
     fgets(input_buff, input_buff_size, stdin);
-    size_t ln = strlen(input_buff) - 1;
 
-    if (input_buff[ln] == '\n')
+    if (this->buffer_enabled == true)
     {
-        input_buff[ln] = '\0';
+        size_t ln = strlen(input_buff) - 1;
+
+        if (input_buff[ln] == '\n')
+        {
+            input_buff[ln] = '\0';
+        }
+    }
+    else
+    {
+        /* Buffer is disabled, only one char is taken */
+        input_buff[1] = '\0';
     }
 
     // Push to History and Return

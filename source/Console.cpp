@@ -379,7 +379,7 @@ void Console::input(char * input_buff,
 
     // Push to History and Return
     char * output_buff = new char[input_buff_size + input_prefix_len];
-    strcat(output_buff, input_prefix);
+    strcpy(output_buff, input_prefix);
     strcat(output_buff, input_buff);
     output(output_buff);
     delete output_buff;
@@ -421,7 +421,7 @@ void Console::custom_input(char * input_buff,
         strcat(output_buff, input_prefix);
         strcat(output_buff, input_buff);
         output(output_buff);
-        delete output_buff;
+        delete[] output_buff;
     }
 }
 

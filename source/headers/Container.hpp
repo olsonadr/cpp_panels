@@ -43,7 +43,7 @@ class Container : public Element
 
         void operator=(const Container & old_container); /* Overloaded assignment */
 
-        ~Container();
+        virtual ~Container();
 
         // Accessors
         int_duple get_dim() { return this->dim; }

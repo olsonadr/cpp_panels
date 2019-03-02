@@ -32,7 +32,7 @@ class Console : public Element
         char bg_char;		    /* The character to be put in empty space */
         struct termios term_info;   /* The termios allowing for echo manip, etc */
         bool display_input_line;    /* Whether the input area should be displayed */
-	bool buffer_enabled;	    /* Whether the buffer is currently enabled */
+        bool buffer_enabled;	    /* Whether the buffer is currently enabled */
 
         // Functions
         void move_input();	    /* Moves cursor to the input pos */
@@ -55,7 +55,7 @@ class Console : public Element
         // Accessors
         int_duple get_dim()	  { return this->dim; }
         char get_bg_char()	  { return this->bg_char; }
-	bool get_buffer_enabled() { return this->buffer_enabled; }
+        bool get_buffer_enabled() { return this->buffer_enabled; }
 
         // Mutators
         void setup_input(struct int_duple g_console_pos);
@@ -70,6 +70,7 @@ class Console : public Element
         void custom_input(char * input_buff,
                           int input_buff_size = MAX_INPUT_SIZE,
                           bool push_to_output = true);
+        char unbuffed_char_input();
         void output(const char * line);
         void clear();
 

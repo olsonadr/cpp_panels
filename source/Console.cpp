@@ -354,10 +354,10 @@ void Console::input(char * input_buff,
     disable_wrap();
 
     // Get Input and Replace \n with \0
-    fgets(input_buff, input_buff_size, stdin);
-
     if (this->buffer_enabled == true)
     {
+        fgets(input_buff, input_buff_size, stdin);
+
         size_t ln = strlen(input_buff) - 1;
 
         if (input_buff[ln] == '\n')
@@ -368,6 +368,7 @@ void Console::input(char * input_buff,
     else
     {
         /* Buffer is disabled, only one char is taken */
+        input_buff[0] = getchar();
         input_buff[1] = '\0';
     }
 
@@ -397,10 +398,10 @@ void Console::custom_input(char * input_buff,
                            bool push_to_output)
 {
     // Get Input and Replace \n with \0
-    fgets(input_buff, input_buff_size, stdin);
-
     if (this->buffer_enabled == true)
     {
+        fgets(input_buff, input_buff_size, stdin);
+
         size_t ln = strlen(input_buff) - 1;
 
         if (input_buff[ln] == '\n')
@@ -411,6 +412,7 @@ void Console::custom_input(char * input_buff,
     else
     {
         /* Buffer is disabled, only one char is taken */
+        input_buff[0] = getchar();
         input_buff[1] = '\0';
     }
 
@@ -427,6 +429,21 @@ void Console::custom_input(char * input_buff,
 
 
 /*
+ * Gets a single, unbuffered character from stdin, returns it without
+ * outputting anything.
+ */
+char Console::unbuffed_char_input()
+{
+    disable_buffer();
+    disable_echo();
+    char result = getchar();
+    enable_echo();
+    enable_buffer();
+    return result;
+}
+
+
+/*
  * Adds the passed string to the history array, pushing everything back
  * and incrementing history_num if it is less than history_len, changes
  * has_changed to true.
@@ -438,6 +455,10 @@ void Console::output(const char * line)
         if (this->history_num < this->history_len)
         {
             this->history_num++;
+        }
+        else
+        {
+            free(this->history[history_num - 1]);
         }
 
         for (int i = this->history_num - 1; i > 0; i--)
@@ -457,6 +478,11 @@ void Console::output(const char * line)
  */
 void Console::clear()
 {
+    for (int i = 0; i < this->history_num; i++)
+    {
+        free(this->history[i]);
+    }
+
     this->history_num = 0;
     this->has_changed = true;
 }

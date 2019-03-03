@@ -94,6 +94,11 @@ void Alert::set_message(const char * new_val)
  */
 void Alert::set_border(Border * new_border)
 {
+    if (border->get_is_dynamic() == DYNAMIC_ELEMENT)
+    {
+        delete border;
+    }
+
     this->border = new_border;
     this->has_changed = true;
 }
@@ -105,6 +110,11 @@ void Alert::set_border(Border * new_border)
  */
 void Alert::set_border(Border & new_border)
 {
+    if (border->get_is_dynamic() == DYNAMIC_ELEMENT)
+    {
+        delete border;
+    }
+
     this->border = &new_border;
     this->has_changed = true;
 }

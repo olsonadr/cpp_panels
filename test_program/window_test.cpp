@@ -18,7 +18,7 @@ int main()
      *    // Setup
      *    Window my_w(100, 20);
      *    my_w.open();
-     *    Alert my_a("Alert Message!!\nSecond lineeeeeee!\nAnd a third!!!!\nPress enter to resize then enter to quit...\n",
+     *    Alert my_a("Alert Message!! (20)\nSecond lineeeeeee! (23)\nAnd a third!!!! (20)\nPress enter to advance... (30)\n",
      *               STATIC_ELEMENT);
      *
      *    // Add Alert to Window

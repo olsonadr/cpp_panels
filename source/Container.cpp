@@ -377,8 +377,15 @@ char * Container::merge()
                     message_height = curr_member->get_y_span();
 
                     int message_x, message_y;
-                    message_x = alert_x + (alert_width / 2) - (message_width / 2) - 4;
+                    message_x = alert_x + (alert_width / 2) - (message_width / 2);
                     message_y = alert_y + (alert_height / 2) - (message_height / 2);
+
+
+                    printf("message x,y,w,h:\n  %d;\n  %d;\n  %d;\n  %d;\nalert box x,y,w,h:\n  %d;\n  %d;\n  %d;\n  %d;",
+                           message_x, message_y, message_width, message_height, alert_x, alert_y, alert_width,
+                           alert_height);
+                    getchar();
+
 
                     int row = 0;
                     int col = 0;

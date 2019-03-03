@@ -140,10 +140,10 @@ int Alert::get_x_span()
     int longest = 0;
     int curr = 0;
 
-    for (int i = 0; i + curr < this->len; i++)
+    for (int i = 0; i < this->len; i++)
     {
-        if (this->message[i + curr] == '\n'
-                || this->message[i + curr] == '\0')
+        if (this->message[i] == '\n'
+                || this->message[i] == '\0')
         {
             /* Found end of line */
 
@@ -154,7 +154,6 @@ int Alert::get_x_span()
                 longest = curr;
             }
 
-            i += curr;
             curr = 0;
         }
         else

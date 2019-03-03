@@ -14,7 +14,8 @@ Alert::Alert(const char * message,
              bool is_dynamic,
              const char * name)
     : Element(0, 0, is_dynamic, "Alert", name),
-      message(message), border(new Border('#', '-', '|', DYNAMIC_ELEMENT)),
+      message(message), size_percentage(3.f / 4),
+      border(new Border('#', '-', '|', DYNAMIC_ELEMENT)),
       bg_char(' ')
 {
     make_invisible();
@@ -34,6 +35,7 @@ Alert::Alert(const char * message,
 Alert::Alert(const Alert & old_alert, bool is_dynamic)
     : Element(old_alert, is_dynamic),
       message(old_alert.message),
+      size_percentage(old_alert.size_percentage),
       len(old_alert.len),
       bg_char(old_alert.bg_char)
 {
@@ -50,6 +52,7 @@ void Alert::operator=(const Alert & old_alert)
     make_invisible();
     Element::operator=(old_alert);
     this->message = old_alert.message;
+    this->size_percentage = old_alert.size_percentage;
     this->len = old_alert.len;
     this->border->operator=(*old_alert.border);
     this->bg_char = old_alert.bg_char;
@@ -100,7 +103,7 @@ void Alert::set_border(Border * new_border)
  * Sets the Border of this Alert to a passed Border pointer, so it can be modified
  * ouside this Alert and it will update. Takes a Border object.
  */
-void Alert::set_border(Border new_border)
+void Alert::set_border(Border & new_border)
 {
     this->border = &new_border;
     this->has_changed = true;
@@ -119,6 +122,17 @@ void Alert::set_bg_char(char new_bg_char)
 
 
 /*
+ * Sets the percentage of its parent container that the Alert will now cover,
+ * defaults to 3/4.
+ */
+void Alert::set_size_percentage(float new_val)
+{
+    this->size_percentage = new_val;
+    this->has_changed = true;
+}
+
+
+/*
  * Returns the number of characters this Alert's message spans horizontally.
  */
 int Alert::get_x_span()
@@ -130,7 +144,8 @@ int Alert::get_x_span()
     {
         curr++;
 
-        if (this->message[curr] == '\n')
+        if (this->message[i + curr] == '\n'
+                || this->message[i + curr] == '\0')
         {
             /* Found end of line */
 
@@ -141,7 +156,7 @@ int Alert::get_x_span()
                 longest = curr;
             }
 
-	    curr = -1;
+            curr = -1;
         }
     }
 

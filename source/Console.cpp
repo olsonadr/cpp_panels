@@ -322,15 +322,9 @@ void Console::set_display_input_line(bool new_val)
  */
 void Console::pause_and_flush()
 {
-    while (true)
-    {
-        char in = getchar();
+    char c;
 
-        if (in != '\n' || in != '\0')
-        {
-            break;
-        }
-    }
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 

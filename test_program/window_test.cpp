@@ -16,14 +16,10 @@ int main()
     /* Alert Test */
     /*
      *    // Setup
-     *    Window my_w(90, 30);
+     *    Window my_w(100, 20);
      *    my_w.open();
-     *    Alert my_a("Alert Message!\nSecond line!\nAnd a third!!!", STATIC_ELEMENT);
-     *    [> debug <]
-     *    //printf("my_a.get_x_span() = %d\nmy_a.get_y_span() = %d\n",
-     *    //       my_a.get_x_span(), my_a.get_y_span());
-     *    //getchar();
-     *    [> end debug <]
+     *    Alert my_a("Alert Message!!\nSecond lineeeeeee!\nAnd a third!!!!\nPress enter to resize then enter to quit...\n",
+     *               STATIC_ELEMENT);
      *
      *    // Add Alert to Window
      *    my_w.add(my_a);
@@ -35,12 +31,12 @@ int main()
      *    my_w.display();
      *    getchar();
      *
-     *    // Make Alert invisible
-     *    //my_a.make_invisible();
+     *    // Changing attribute
+     *    my_a.set_size_percentage(1.f / 2);
      *
-     *    //// Redisplay (and wait again)
-     *    //my_w.display();
-     *    //getchar();
+     *    // Redisplaying
+     *    my_w.display();
+     *    getchar();
      *
      *    // Cleanup
      *    my_w.close();

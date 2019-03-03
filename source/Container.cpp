@@ -11,7 +11,7 @@ Container::Container(int pos_x, int pos_y,
                      int width, int height,
                      bool is_dynamic,
                      const char * type,
-		     const char * name)
+                     const char * name)
     : Element(pos_x, pos_y, is_dynamic, type, name),
       members(new Element * [1]), n_members(0),
       len_members(1), bg_char(' ')
@@ -362,20 +362,22 @@ char * Container::merge()
                     Alert * curr_member =
                         static_cast<Alert *>(this->members[i]);
 
+                    float size_percentage = curr_member->get_size_percentage();
+
                     int alert_width, alert_height;
-                    alert_width = 2 * this->dim.x / 3;
-                    alert_height = 2 * this->dim.y / 3;
+                    alert_width = size_percentage * this->dim.x;
+                    alert_height = size_percentage * this->dim.y;
 
                     int alert_x, alert_y;
-                    alert_x = this->dim.x / 6;
-                    alert_y = this->dim.y / 6;
+                    alert_x = ((1 - size_percentage) / 2) * this->dim.x;
+                    alert_y = ((1 - size_percentage) / 2) * this->dim.y;
 
                     int message_width, message_height;
                     message_width = curr_member->get_x_span();
                     message_height = curr_member->get_y_span();
 
                     int message_x, message_y;
-                    message_x = alert_x + (alert_width / 2) - (message_width / 2);
+                    message_x = alert_x + (alert_width / 2) - (message_width / 2) - 4;
                     message_y = alert_y + (alert_height / 2) - (message_height / 2);
 
                     int row = 0;
@@ -459,12 +461,6 @@ char * Container::merge()
                     // Handle Message
                     row = message_y;
                     col = message_x;
-
-                    /* debug */
-                    //printf("row = %d, col = %d", row, col);
-                    //getchar();
-                    /* end debug */
-
 
                     for (int j = 0; j < curr_member->get_len(); j++)
                     {

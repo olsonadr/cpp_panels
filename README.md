@@ -10,6 +10,7 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 - [Components](#implemented-components) - list of all currently implemented Components in the library
 - [Containers](#implemented-containers) - list of all currently implemented Containers in the library
 - [Usage](#intended-usage) - the intended usage and basic work-flow of this library
+- [Examples](#example-projects) - some screenshots of a class project using this library
 - [TODO](#TODO) - list of things I'm looking into
 
 
@@ -89,6 +90,12 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 
 - To display any of this work, you'll need to create a Window. Note that you cannot add Windows to any other Container. You can imagine a Window as the 'canvas' on which you put all other Elements. You can add Elements to a Window freely (you can add Labels directly, for example). Before rendering anything, you should call the open() function. This will clear your screen and resize your terminal to size (hopefully). Feel free to call this whenever you want to reset the terminal size, if you want to force this for the user. When you want to render to the terminal, call the display() function of your Window object. This will print the contents of its merged buffer to the terminal. When you're done with the Window make sure to call close(). Have fun!
 
+## Example Projects
+- Hunt the Wumpus - class project in which player must navigate the cave of the dreaded 'Wumpus,' kill it, and steal its gold before escaping.
+  - The general section of the UI are mostly Panels with Borders. The right sidebar is a List with Panels and Labels in it as well as a Console for communicating information to the Player. The game over dialogue is an example of an Alert with .82 percentage scaling. The Player's is its own Label that is moved around on top of the map.
+  - ![Hunt the Wumpus UI Screenshot 1](screenshots/hunt-the-wumpus-1.png?raw=true)
+  - ![Hunt the Wumpus UI Screenshot 2](screenshots/hunt-the-wumpus-2.png?raw=true)
+  - ![Hunt the Wumpus UI Screenshot 3](screenshots/hunt-the-wumpus-3.png?raw=true)
 
 ## TODO
 - Implement:

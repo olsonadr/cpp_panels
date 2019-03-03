@@ -365,27 +365,24 @@ char * Container::merge()
                     float size_percentage = curr_member->get_size_percentage();
 
                     int alert_width, alert_height;
-                    alert_width = size_percentage * this->dim.x;
-                    alert_height = size_percentage * this->dim.y;
+                    alert_width = roundf(size_percentage * this->dim.x);
+                    alert_height = roundf(size_percentage * this->dim.y);
 
                     int alert_x, alert_y;
-                    alert_x = ((1 - size_percentage) / 2) * this->dim.x;
-                    alert_y = ((1 - size_percentage) / 2) * this->dim.y;
+                    alert_x = roundf(((1 - size_percentage) / 2) * this->dim.x);
+                    alert_y = roundf(((1 - size_percentage) / 2) * this->dim.y);
 
                     int message_width, message_height;
                     message_width = curr_member->get_x_span();
                     message_height = curr_member->get_y_span();
 
                     int message_x, message_y;
-                    message_x = alert_x + (alert_width / 2) - (message_width / 2);
-                    message_y = alert_y + (alert_height / 2) - (message_height / 2);
-
-
-                    printf("message x,y,w,h:\n  %d;\n  %d;\n  %d;\n  %d;\nalert box x,y,w,h:\n  %d;\n  %d;\n  %d;\n  %d;",
-                           message_x, message_y, message_width, message_height, alert_x, alert_y, alert_width,
-                           alert_height);
-                    getchar();
-
+                    message_x = alert_x
+                                + roundf((float(alert_width) / 2))
+                                - roundf((float(message_width) / 2));
+                    message_y = alert_y
+                                + roundf((float(alert_height) / 2))
+                                - roundf((float(message_height) / 2));
 
                     int row = 0;
                     int col = 0;

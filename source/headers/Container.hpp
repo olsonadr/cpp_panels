@@ -8,6 +8,7 @@
 #define CONTAINER_HPP
 
 #include <cstring>      /* For strcmp() */
+#include <cmath>	/* For round() */
 #include "Element.hpp"  /* Base class of Container */
 #include "Label.hpp"    /* For using specific functionality while merging */
 #include "Border.hpp"   /* For using specific functionality while merging */

@@ -1,4 +1,4 @@
-# cpp_panels library v1.0
+# cpp_panels library v1.0.1
 
 ## Abstract
 An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.oracle.com/javase/tutorial/uiswing/components/panel.html)-esque c++ library for terminal output.

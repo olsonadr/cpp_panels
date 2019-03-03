@@ -20,9 +20,9 @@ Alert::Alert(const char * message,
 {
     make_invisible();
 
-    this->len = 0;
+    this->len = -1;
 
-    while (this->message[len] != '\0')
+    while (this->message[len + 1] != '\0')
     {
         this->len++;
     }
@@ -79,9 +79,9 @@ void Alert::set_message(const char * new_val)
 {
     this->has_changed = true;
     this->message = new_val;
-    this->len = 0;
+    this->len = -1;
 
-    while (this->message[len] != '\0')
+    while (this->message[len + 1] != '\0')
     {
         this->len++;
     }

@@ -138,12 +138,10 @@ void Alert::set_size_percentage(float new_val)
 int Alert::get_x_span()
 {
     int longest = 0;
-    int curr = -1;
+    int curr = 0;
 
-    for (int i = 0; i < this->len - 1; i++)
+    for (int i = 0; i + curr < this->len; i++)
     {
-        curr++;
-
         if (this->message[i + curr] == '\n'
                 || this->message[i + curr] == '\0')
         {
@@ -157,7 +155,11 @@ int Alert::get_x_span()
             }
 
             i += curr;
-            curr = -1;
+            curr = 0;
+        }
+        else
+        {
+            curr++;
         }
     }
 

@@ -156,6 +156,7 @@ int Alert::get_x_span()
                 longest = curr;
             }
 
+            i += curr;
             curr = -1;
         }
     }

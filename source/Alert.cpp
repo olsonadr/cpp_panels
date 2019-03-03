@@ -20,9 +20,9 @@ Alert::Alert(const char * message,
 {
     make_invisible();
 
-    this->len = -1;
+    this->len = 0;
 
-    while (this->message[len + 1] != '\0')
+    while (this->message[len] != '\0')
     {
         this->len++;
     }
@@ -79,9 +79,9 @@ void Alert::set_message(const char * new_val)
 {
     this->has_changed = true;
     this->message = new_val;
-    this->len = -1;
+    this->len = 0;
 
-    while (this->message[len + 1] != '\0')
+    while (this->message[len] != '\0')
     {
         this->len++;
     }
@@ -140,7 +140,7 @@ int Alert::get_x_span()
     int longest = 0;
     int curr = -1;
 
-    for (int i = 0; i < this->len; i++)
+    for (int i = 0; i < this->len - 1; i++)
     {
         curr++;
 

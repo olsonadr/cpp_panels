@@ -23,6 +23,7 @@ Label::Label(int pos_x, int pos_y,
     }
 }
 
+
 Label::Label(int pos_x, int pos_y,
              const char * str,
              bool is_dynamic,
@@ -39,12 +40,14 @@ Label::Label(int pos_x, int pos_y,
     }
 }
 
+
 // Copy Constructor
 Label::Label(const Label & old_label, bool is_dynamic)
     : Element(old_label, is_dynamic),
       len(old_label.len), str(old_label.str),
       is_vertical(old_label.is_vertical),
       dynamic_str(old_label.dynamic_str) {}
+
 
 // Destructor
 Label::~Label()
@@ -54,6 +57,7 @@ Label::~Label()
         delete[] this->str;
     }
 }
+
 
 // Overloaded Assignment
 void Label::operator=(const Label & old_label)
@@ -65,6 +69,7 @@ void Label::operator=(const Label & old_label)
     this->str = old_label.str;
 }
 
+
 // Methods
 /*
  * Sets the str field and len, modifying memory as needed, setting has_changed.
@@ -72,6 +77,11 @@ void Label::operator=(const Label & old_label)
 void Label::set_str(const char * new_val,
                     bool is_vertical)
 {
+    if (this->dynamic_str == true)
+    {
+        delete[] this->str;
+    }
+
     this->has_changed = true;
     this->is_vertical = is_vertical;
     this->dynamic_str = false;
@@ -84,6 +94,7 @@ void Label::set_str(const char * new_val,
     }
 }
 
+
 /*
  * Sets the str field and len, copying the passed cstring to new dynamic memory,
  * modifying memory as needed, setting has_changed.
@@ -91,6 +102,11 @@ void Label::set_str(const char * new_val,
 void Label::set_str_cpy(const char * new_val,
                         bool is_vertical)
 {
+    if (this->dynamic_str == true)
+    {
+        delete[] this->str;
+    }
+
     this->has_changed = true;
     this->is_vertical = is_vertical;
     this->len = 0;
@@ -106,6 +122,7 @@ void Label::set_str_cpy(const char * new_val,
     this->dynamic_str = true;
 }
 
+
 /*
  * Sets whether the Label is vertically oriented.
  */
@@ -114,6 +131,7 @@ void Label::set_is_vertical(bool is_vertical)
     this->has_changed = true;
     this->is_vertical = is_vertical;
 }
+
 
 /*
  * Returns the number of characters this Label spans horizontally.
@@ -142,6 +160,7 @@ int Label::get_x_span()
 
     return longest;
 }
+
 
 /*
  * Returns the number of characters this Label spans horizontally.

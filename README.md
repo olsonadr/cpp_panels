@@ -93,8 +93,8 @@ An [ncurses](https://www.gnu.org/software/ncurses/) and [jpanel](https://docs.or
 ## Example Projects
 - Hunt the Wumpus - class project in which player must navigate the cave of the dreaded 'Wumpus,' kill it, and steal its gold before escaping.
   - The general section of the UI are mostly Panels with Borders. The right sidebar is a List with Panels and Labels in it as well as a Console for communicating information to the Player. The game over dialogue is an example of an Alert with .82 percentage scaling. The Player's is its own Label that is moved around on top of the map.
-  - ![Hunt the Wumpus UI Screenshot 1](screenshots/hunt-the-wumpus-ui.png?raw=true)
-  - ![Hunt the Wumpus UI Screenshot 2](screenshots/hunt-the-wumpus-alert.png?raw=true)
+  - ![Hunt the Wumpus UI Screenshot 1](doc/screenshots/hunt-the-wumpus-ui.png?raw=true)
+  - ![Hunt the Wumpus UI Screenshot 2](doc/screenshots/hunt-the-wumpus-alert.png?raw=true)
 
 ## TODO
 - Implement:

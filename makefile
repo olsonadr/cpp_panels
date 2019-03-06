@@ -4,6 +4,7 @@ HPP_DIR=include
 CPP_DIR=src
 BUILD_DIR=build
 OUT_DIR=bin
+TEST_DIR=test
 
 all: shared
 .PHONY: shared static clean
@@ -48,5 +49,9 @@ $(OUT_DIR):
 	mkdir $(OUT_DIR)
 
 clean:
+	rm -r -f $(OUT_DIR) $(BUILD_DIR)
+	make -C $(TEST_DIR) clean
+
+clean_lib:
 	rm -r -f $(OUT_DIR) $(BUILD_DIR)
 

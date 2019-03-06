@@ -63,12 +63,12 @@ $(BUILD_DIR)/list_test.o: $(BUILD_DIR) $(CPP_DIR)/list_test.cpp
 $(LIB_OUT_DEST)/lib$(LIB_NAME).a: $(LIB_OUT_DEST)
 	make -C$(LIB_MAKE_DIR) static
 	cp $(LIB_OUT_SRC)/lib$(LIB_NAME).a $(LIB_OUT_DEST)
-	make -C$(LIB_MAKE_DIR) clean
+	make -C$(LIB_MAKE_DIR) clean_lib
 
 $(LIB_OUT_DEST)/lib$(LIB_NAME).so: $(LIB_OUT_DEST)
 	make -C$(LIB_MAKE_DIR) shared
 	cp $(LIB_OUT_SRC)/lib$(LIB_NAME).so $(LIB_OUT_DEST)
-	make -C$(LIB_MAKE_DIR) clean
+	make -C$(LIB_MAKE_DIR) clean_lib
 
 
 # Directory Targets

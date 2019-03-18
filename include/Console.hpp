@@ -38,7 +38,6 @@ class Console : public Element
         void move_input();	    /* Moves cursor to the input pos */
         void move_home();	    /* Moves cursor back home */
 
-
     public:
         // Constructors, Operators, and Destructors
         Console(int pos_x, int pos_y, int width, int height,

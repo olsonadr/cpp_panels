@@ -98,6 +98,7 @@ void Window::close()
     reset_terminal();
 
     // Restore Echo
+    tcgetattr(0, &this->term_info);
     this->term_info.c_lflag |= ECHO; /* Turn on ECHO */
     tcsetattr(0, TCSANOW, &this->term_info);
 }
